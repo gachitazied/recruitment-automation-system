@@ -1,6 +1,7 @@
 package com.RAS.recruitment_automation_system.joblisting;
 
 import com.RAS.recruitment_automation_system.application.Application;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -33,6 +34,7 @@ public class JobListing {
     private Date postedDate;
     private Date closingDate;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "jobListing", cascade = CascadeType.ALL)
     private List<Application> applications;
 }
