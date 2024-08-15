@@ -9,6 +9,8 @@ import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+
+import java.sql.Date;
 import java.util.List;
 
 @Entity
@@ -18,18 +20,18 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @EntityListeners(AuditingEntityListener.class)
+@Table(name = "joblisting")
 public class JobListing {
     @Id
     @GeneratedValue
     private int id;
-
     private String title;
     private String description;
     private String location;
     private String department;
     private String requirements;
-    private java.sql.Date postedDate;
-    private java.sql.Date closingDate;
+    private Date postedDate;
+    private Date closingDate;
 
     @OneToMany(mappedBy = "jobListing", cascade = CascadeType.ALL)
     private List<Application> applications;

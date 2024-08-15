@@ -3,6 +3,8 @@ package com.RAS.recruitment_automation_system.joblisting;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 
+import java.sql.Date;
+
 public record JobListingRequest(
         Integer id,
         @NotNull(message = "100")
@@ -21,8 +23,8 @@ public record JobListingRequest(
         @NotEmpty(message = "104")
         String requirements,
 
-        java.sql.Date postedDate,
-        java.sql.Date closingDate
+        Date postedDate,
+        Date closingDate
 ) {
 
 }

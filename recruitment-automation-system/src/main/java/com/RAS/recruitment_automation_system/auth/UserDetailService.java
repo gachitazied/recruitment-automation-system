@@ -22,8 +22,6 @@ public class UserDetailService {
         if (connectedUser == null || !connectedUser.isAuthenticated()) {
             throw new IllegalStateException("User is not authenticated");
         }
-
-
         var userDetail = UserDetail.builder()
                 .firstName(request.getFirstName())
                 .lastName(request.getLastName())

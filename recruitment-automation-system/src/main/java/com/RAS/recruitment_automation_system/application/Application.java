@@ -9,6 +9,8 @@ import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import java.sql.Date;
+
 @Entity
 @Getter
 @Setter
@@ -16,19 +18,18 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 @AllArgsConstructor
 @NoArgsConstructor
 @EntityListeners(AuditingEntityListener.class)
+@Table(name = "application")
 public class Application {
     @Id
     @GeneratedValue
     private int id;
-
     @ManyToOne
     @JoinColumn(name = "jobId", nullable = false)
     private JobListing jobListing;
-
     private String candidateName;
     private String candidateEmail;
     private String resumeUrl;
     private String coverLetter;
     private String status;
-    private java.sql.Date applicationDate;
+    private Date applicationDate;
 }

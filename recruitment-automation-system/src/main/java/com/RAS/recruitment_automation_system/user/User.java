@@ -1,7 +1,9 @@
 package com.RAS.recruitment_automation_system.user;
 
+import com.RAS.recruitment_automation_system.notification.Notification;
 import com.RAS.recruitment_automation_system.role.Role;
-import com.RAS.recruitment_automation_system.usersDetail.UserDetail;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -9,6 +11,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.security.Principal;
+
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
@@ -33,10 +36,7 @@ public class User implements UserDetails, Principal {
     @Column(unique = true, nullable = false)
     private String email;
 
-
     private String password;
-
-
 
     private boolean accountLocked;
     private boolean enabled;
@@ -45,6 +45,11 @@ public class User implements UserDetails, Principal {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "role_id")
     private Role roles;
+
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Notification> notifications ;
 
 
 
