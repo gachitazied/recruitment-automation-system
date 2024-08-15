@@ -2,7 +2,7 @@ package com.RAS.recruitment_automation_system.joblisting;
 
 import org.springframework.stereotype.Service;
 
-@Service
+    @Service
 public class JobListingMapper {
     public JobListing toJobListing(JobListingRequest request) {
 

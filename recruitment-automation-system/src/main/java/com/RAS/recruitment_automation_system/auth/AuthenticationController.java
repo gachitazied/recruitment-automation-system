@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 @Tag(name = "Authentication")
 public class AuthenticationController {
 
-   private final UserDetailService serviceUserDetail;
+
     private final AuthenticationService service;
 
     @PostMapping("/register")
@@ -38,16 +38,7 @@ public class AuthenticationController {
     public void confirm(@RequestParam String token) throws MessagingException {
         service.activateAccount(token);
     }
-    @PostMapping("/register-detail")
-    public ResponseEntity<?> registerDetail(
-            @RequestBody @Valid RegistrationUserDetailRequest request ,
-            Authentication connectedUser
-    ) {
 
-        serviceUserDetail.saveUserDetail(request,connectedUser);
-        return ResponseEntity.accepted().build();
-
-    }
 
 
 
