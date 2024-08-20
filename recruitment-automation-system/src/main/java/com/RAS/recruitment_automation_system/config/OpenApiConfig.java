@@ -19,7 +19,7 @@ import io.swagger.v3.oas.annotations.servers.Server;
                         url = "https://ziedgach.com/courses"
                 ),
                 description = "OpenApi documentaion for spring security",
-                title = "OpenApi specification - zied gach ",
+                title = "OpenApi specification - zied gachita ",
                 version = "1.0",
                 license = @License(
                         name = "licence name",
@@ -30,7 +30,7 @@ import io.swagger.v3.oas.annotations.servers.Server;
         servers = {
                 @Server(
                         description = "Local ENV ",
-                        url = "http://localhost:8088/api/v1"
+                        url = "http://localhost:8090/api/v1"
                 ),
                 @Server(
                         description = "PROD ENV",
