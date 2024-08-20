@@ -6,7 +6,7 @@ import { skipUntil } from 'rxjs';
 @Component({
   selector: 'app-activate-account',
   templateUrl: './activate-account.component.html',
-  styleUrls: ['./activate-account.component.css']
+  styleUrls: ['./activate-account.component.scss']
 })
 export class ActivateAccountComponent {
 
