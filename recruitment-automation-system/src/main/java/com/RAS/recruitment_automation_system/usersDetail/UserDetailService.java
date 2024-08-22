@@ -32,17 +32,11 @@ public class UserDetailService {
        return userDetail.getId();
     }
 
-    public List<UserDetailResponse> findAllUser() {
-        List<UserDetail> userDetails = repository.findAll();
 
-        return userDetails.stream()
-                .map(detail -> mapper.toUserDetailAndUserResponse(detail, detail.getUser()))
-                .collect(Collectors.toList());
-    }
+
 
 
     public UserDetailResponse findUserById(Integer id) {
-
         UserDetail userDetail = repository.findById(id).get();
         return mapper.toUserDetailResponse(userDetail);
     }
@@ -59,5 +53,11 @@ public class UserDetailService {
     public void deleteUserDetail(Integer id) {
 
         repository.deleteById(id);
+    }
+
+    public List<UserDetailResponse> findAllUser(Authentication connectedUser) {
+        User user = ((User) connectedUser.getPrincipal());
+        List<UserDetail> userDetailList = repository.findUserDetailsAndUserByUserId(user.getId());
+        return userDetailList.stream().map(mapper::toUserDetailResponse).collect(Collectors.toList());
     }
 }

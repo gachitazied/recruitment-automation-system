@@ -25,9 +25,9 @@ public class UserDetailController {
     }
 
     @GetMapping("/findAll")
-    public ResponseEntity<List<UserDetailResponse>> findAllUsers() {
-        List<UserDetailResponse> userDetails = service.findAllUser();
-        return ResponseEntity.ok(userDetails);
+    public ResponseEntity<List<UserDetailResponse>> findAllUsers(Authentication connectedUser) {
+        List<UserDetailResponse> userDetailResponses = service.findAllUser(connectedUser);
+        return ResponseEntity.ok(userDetailResponses);
     }
 
     @GetMapping("/{id}")

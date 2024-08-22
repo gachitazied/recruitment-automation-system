@@ -19,6 +19,8 @@ public class UserDetailMapper {
     public UserDetailResponse toUserDetailResponse(UserDetail userDetail) {
 
         return UserDetailResponse.builder()
+                .email(userDetail.getUser().getEmail())
+                .username(userDetail.getUser().getFullName())
                 .id(userDetail.getId())
                 .firstName(userDetail.getFirstName())
                 .lastName(userDetail.getLastName())
@@ -27,17 +29,6 @@ public class UserDetailMapper {
                 .build();
     }
 
-    public UserDetailResponse toUserDetailAndUserResponse(UserDetail userDetail, User user) {
-        return UserDetailResponse.builder()
-                .id(userDetail.getId())
-                .email(user.getEmail())
-                .username(user.getUsername())
-                .firstName(userDetail.getFirstName())
-                .lastName(userDetail.getLastName())
-                .phoneNumber(userDetail.getPhoneNumber())
-                .address(userDetail.getAddress())
-                .user(user)
-                .build();
-    }
+
 
 }

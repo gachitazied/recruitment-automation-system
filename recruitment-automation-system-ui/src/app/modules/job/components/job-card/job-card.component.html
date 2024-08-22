@@ -4,7 +4,7 @@
   [class.border-success]="job.active"
   [class.border-warning]="job.archived"
 >
-  <div class="card-body overflow-scroll">
+  <div class="card-body overflow-auto"> <!-- Changed from overflow-scroll to overflow-auto -->
     <h5 class="card-title fs-6 text-nowrap fw-bold mb-1">
       <i class="fas fa-briefcase"></i>&nbsp;{{ job.title }}
     </h5>
@@ -25,7 +25,6 @@
     </p>
   </div>
   <div class="card-footer d-flex gap-2 justify-content-between align-items-center">
-
+    <button class="btn btn-apply">Apply</button>
   </div>
 </div>
-

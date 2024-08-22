@@ -17,10 +17,11 @@ import java.util.Optional;
 public interface UserDetailRepository extends JpaRepository<UserDetail,Integer>, JpaSpecificationExecutor<UserDetail> {
 
     @Query("""
-    SELECT ud 
+    SELECT ud, u 
     FROM UserDetail ud 
     JOIN ud.user u 
     WHERE u.id = :userId
     """)
-    List<UserDetail> findUserDetailsByUserId(@Param("userId") Integer userId);
+    List<UserDetail> findUserDetailsAndUserByUserId(@Param("userId") Integer userId);
+
 }

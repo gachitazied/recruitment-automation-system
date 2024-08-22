@@ -10,7 +10,6 @@ import lombok.*;
 @Builder
 public class UserDetailResponse {
     private Integer id;
-    private User user;
     private String username;
     private String email;
     private String firstName;

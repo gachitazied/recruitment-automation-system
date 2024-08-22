@@ -53,6 +53,9 @@ public class User implements UserDetails, Principal {
 
 
 
+   public String getFullName() {
+       return username;
+   }
 
     @Override
     public String getName() {

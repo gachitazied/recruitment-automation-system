@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {UserDetailResponse} from "../../../../services/models/user-detail-response";
-import {User} from "../../../../services/models/user";
-import {AuthenticationService} from "../../../../services/services/authentication.service";
-import {UserDetailRequest} from "../../../../services/models/user-detail-request";
-
+import { Router } from '@angular/router';
+import { UserDetailService } from '../../../../services/services/user-detail.service'; // Service généré par OpenAPI
+import { UserDetailRequest } from '../../../../services/models/user-detail-request';
+import { UserDetailResponse } from "../../../../services/models/user-detail-response"; // Modèle pour la réponse
 
 @Component({
   selector: 'app-user-details',
@@ -11,8 +10,16 @@ import {UserDetailRequest} from "../../../../services/models/user-detail-request
   styleUrls: ['./user-details.component.css']
 })
 export class UserDetailsComponent implements OnInit {
-  userDetail: UserDetailResponse = {
-    id: 0,
+  userDetail: UserDetailRequest = {
+    firstName: '',
+    lastName: '',
+    phoneNumber: '',
+    address: ''
+  };
+
+  userDetailResponse: UserDetailResponse = {
+    email: '',
+    username: '',
     firstName: '',
     lastName: '',
     phoneNumber: '',
@@ -20,48 +27,42 @@ export class UserDetailsComponent implements OnInit {
   };
 
   constructor(
-    private userService: UserService,
-    private authService: AuthenticationService // Injectez le service d'authentification
+    private router: Router,
+    private userDetailService: UserDetailService
   ) {}
 
   ngOnInit(): void {
-    const id = this.authService.getUserId(); // Obtenez l'ID utilisateur depuis le service
-    if (id !== null) {
-      this.loadUserDetails(id);
-    } else {
-      console.error('User ID not found');
-
-    }
+    this.loadUserDetails();
   }
 
-  loadUserDetails(id: number): void {
-    this.userService.findUserById(id).subscribe(data => {
-      this.userDetail = data;
+  saveUserDetail() {
+    this.userDetailService.create$Response({
+      body: this.userDetail
+    }).subscribe({
+      next: (response) => {
+        console.log('User details updated successfully!', response);
+        this.loadUserDetails();
+      },
+      error: (error) => {
+        console.error('Error updating user details', error);
+      }
     });
   }
 
-  onSubmit(): void {
-    const id = this.userDetail.id;
-    const updateRequest: UserDetailRequest= {
-     id: this.userDetail.id,
-     user: this.userDetail.user,
-     firstName: this.userDetail.firstName,
-     lastName: this.userDetail.lastName,
-     phoneNumber: this.userDetail.phoneNumber,
-     address: this.userDetail.address
-    };
-
-    this.userService.updateUserDetail(id, updateRequest).subscribe(() => {
-      console.log('User details updated successfully');
+  private loadUserDetails() {
+    this.userDetailService.findAllUsers().subscribe({
+      next: (response) => {
+        console.log('API response:', response);
+        if (response.length > 0) {
+          this.userDetailResponse = response[0];
+        }
+      },
+      error: (error) => {
+        console.error('Error loading user details', error);
+      }
     });
   }
 
-  onDelete(): void {
-    const id = this.userDetail.id;
 
-    this.userService.deleteUserDetail(id).subscribe(() => {
-      console.log('User details deleted successfully');
-      // Rediriger ou mettre à jour l'UI après suppression
-    });
-  }
+
 }

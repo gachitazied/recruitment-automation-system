@@ -12,7 +12,7 @@ import {JobListingResponse} from "../../../../services/models/job-listing-respon
 export class JobListComponent implements OnInit{
   jobResponse: PageResponseJobListingResponse = {};
   page = 0;
-  size = 3;
+  size = 5;
   pages: any = [];
   message = '';
   level: 'success' |'error' = 'success';
