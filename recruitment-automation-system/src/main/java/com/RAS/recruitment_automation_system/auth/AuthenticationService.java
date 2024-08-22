@@ -111,7 +111,7 @@ public class AuthenticationService {
         var claims = new HashMap<String, Object>();
         var user = ((User)auth.getPrincipal());
 
-        claims.put("Username",user.getUsername());
+        claims.put("Username",user.getEmail());
 
         var jwtToken = jwtService.generateToken(claims, user);
 

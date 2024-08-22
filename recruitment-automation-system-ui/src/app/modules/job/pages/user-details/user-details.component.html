@@ -1,0 +1,24 @@
+<div class="user-details">
+  <h2>User Details</h2>
+
+  <div class="info">
+    <p><strong>Username:</strong> {{ user.username }}</p>
+    <p><strong>Email:</strong> {{ user.email }}</p>
+  </div>
+
+  <form (ngSubmit)="onSubmit()" #userForm="ngForm">
+    <label for="firstname">First Name:</label>
+    <input type="text" id="firstname" [(ngModel)]="user.firstname" name="firstname" required>
+
+    <label for="lastname">Last Name:</label>
+    <input type="text" id="lastname" [(ngModel)]="user.lastname" name="lastname" required>
+
+    <label for="phonenumber">Phone Number:</label>
+    <input type="text" id="phonenumber" [(ngModel)]="user.phonenumber" name="phonenumber" required>
+
+    <label for="address">Address:</label>
+    <textarea id="address" [(ngModel)]="user.address" name="address" required></textarea>
+
+    <button type="submit" [disabled]="!userForm.form.valid">Submit</button>
+  </form>
+</div>

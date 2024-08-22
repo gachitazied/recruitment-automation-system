@@ -21,7 +21,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @EntityListeners(AuditingEntityListener.class)
-@Table(name = "joblisting")
+@Table(name = "job_listing")
 public class JobListing {
     @Id
     @GeneratedValue
@@ -35,6 +35,6 @@ public class JobListing {
     private Date closingDate;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "jobListing", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "jobListing")
     private List<Application> applications;
 }

@@ -44,6 +44,7 @@ public class JobListingService {
                 jobListingPage.isLast()
         );
     }
+
     public PageResponse<JobListingResponse> findJobsById(int jobId, int page, int size) {
         Pageable pageable = PageRequest.of(page, size, Sort.by("postedDate").descending());
         Page<JobListing> jobListingPage = jobListingRepository.findAllByJobId(jobId, pageable);
