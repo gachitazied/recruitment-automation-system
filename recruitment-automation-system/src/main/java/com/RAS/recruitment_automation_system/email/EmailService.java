@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.thymeleaf.context.Context;
 import org.thymeleaf.spring6.SpringTemplateEngine;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -63,4 +64,29 @@ public class EmailService {
 
         mailSender.send(mimeMessage);
     }
+
+    @Async
+    public void sendNotificationEmail(String to, String subject, String message) throws MessagingException {
+        MimeMessage mimeMessage = mailSender.createMimeMessage();
+        MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, MimeMessageHelper.MULTIPART_MODE_MIXED, "UTF-8");
+
+        // Préparer le contexte pour Thymeleaf
+        Context context = new Context();
+        context.setVariable("message", message);
+        context.setVariable("date", new Date());
+
+
+        String emailContent = templateEngine.process("notification", context);
+
+        helper.setFrom("Gachita&Barkaoui@gmail.com");
+        helper.setTo(to);
+        helper.setSubject(subject);
+        helper.setText(emailContent, true); // true pour le format HTML
+
+        mailSender.send(mimeMessage);
+        log.info("Email sent to {}", to);
+    }
+
+
+
 }

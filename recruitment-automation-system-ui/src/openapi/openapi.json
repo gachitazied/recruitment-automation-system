@@ -266,12 +266,23 @@
         }
       }
     },
-    "/app/create": {
+    "/app/create/{jobId}": {
       "post": {
         "tags": [
           "application"
         ],
         "operationId": "createApplication",
+        "parameters": [
+          {
+            "name": "jobId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
         "requestBody": {
           "content": {
             "application/json": {
@@ -931,10 +942,6 @@
         }
       },
       "NotificationRequest": {
-        "required": [
-          "isRead",
-          "message"
-        ],
         "type": "object",
         "properties": {
           "id": {
@@ -1039,6 +1046,12 @@
         }
       },
       "ApplicationRequest": {
+        "required": [
+          "candidateEmail",
+          "candidateName",
+          "jobId",
+          "resumeUrl"
+        ],
         "type": "object",
         "properties": {
           "id": {
@@ -1064,43 +1077,9 @@
             "type": "string",
             "format": "date-time"
           },
-          "jobListing": {
-            "$ref": "#/components/schemas/JobListing"
-          },
-          "jobListingId": {
-            "$ref": "#/components/schemas/JobListing"
-          }
-        }
-      },
-      "JobListing": {
-        "type": "object",
-        "properties": {
-          "id": {
+          "jobId": {
             "type": "integer",
             "format": "int32"
-          },
-          "title": {
-            "type": "string"
-          },
-          "description": {
-            "type": "string"
-          },
-          "location": {
-            "type": "string"
-          },
-          "department": {
-            "type": "string"
-          },
-          "requirements": {
-            "type": "string"
-          },
-          "postedDate": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "closingDate": {
-            "type": "string",
-            "format": "date-time"
           }
         }
       },
@@ -1274,9 +1253,6 @@
           "applicationDate": {
             "type": "string",
             "format": "date-time"
-          },
-          "jobListing": {
-            "$ref": "#/components/schemas/JobListing"
           }
         }
       },

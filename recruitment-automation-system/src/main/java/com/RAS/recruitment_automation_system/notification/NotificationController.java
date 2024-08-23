@@ -1,6 +1,7 @@
 package com.RAS.recruitment_automation_system.notification;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.mail.MessagingException;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -17,9 +18,16 @@ public class NotificationController {
     public ResponseEntity<Integer> createNotification(
             @Valid @RequestBody NotificationRequest request,
             Authentication connectedUser
-    ) {
-        return ResponseEntity.ok(notificationService.createNotification(request, connectedUser));
+    ) throws MessagingException {
+
+        Integer notificationId = notificationService.createNotification(request, connectedUser);
+
+
+        notificationService.sendNotificationEmail(request, connectedUser);
+
+        return ResponseEntity.ok(notificationId);
     }
+
     @GetMapping("/findAll")
     public  ResponseEntity<NotificationResponse> findAllNotifications(Authentication connectedUser) {
         return ResponseEntity.ok(notificationService.findAllNotifications(connectedUser));

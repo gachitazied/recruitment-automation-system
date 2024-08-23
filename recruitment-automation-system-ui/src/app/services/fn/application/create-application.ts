@@ -9,12 +9,14 @@ import { RequestBuilder } from '../../request-builder';
 import { ApplicationRequest } from '../../models/application-request';
 
 export interface CreateApplication$Params {
+  jobId: number;
       body: ApplicationRequest
 }
 
 export function createApplication(http: HttpClient, rootUrl: string, params: CreateApplication$Params, context?: HttpContext): Observable<StrictHttpResponse<number>> {
   const rb = new RequestBuilder(rootUrl, createApplication.PATH, 'post');
   if (params) {
+    rb.path('jobId', params.jobId, {});
     rb.body(params.body, 'application/json');
   }
 
@@ -28,4 +30,4 @@ export function createApplication(http: HttpClient, rootUrl: string, params: Cre
   );
 }
 
-createApplication.PATH = '/app/create';
+createApplication.PATH = '/app/create/{jobId}';

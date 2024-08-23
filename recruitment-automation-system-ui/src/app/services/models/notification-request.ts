@@ -3,6 +3,6 @@
 export interface NotificationRequest {
   date?: string;
   id?: number;
-  isRead: boolean;
-  message: string;
+  isRead?: boolean;
+  message?: string;
 }

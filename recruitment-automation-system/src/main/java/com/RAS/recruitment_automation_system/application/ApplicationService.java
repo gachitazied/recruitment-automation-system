@@ -26,16 +26,8 @@ public class ApplicationService {
     private final ApplicationRepository applicationRepository;
     private final ApplicationMapper applicationMapper;
     private final JobListingRepository jobListingRepository;
-    public Integer createApplication(ApplicationRequest request) {
-        JobListing jobListing = jobListingRepository.findById(request.getJobListingId().getId())
-                .orElseThrow(() -> new RuntimeException("JobListing not found"));
 
 
-        Application application = applicationMapper.toApplication(request);
-        application.setJobListing(jobListing);
-
-        return applicationRepository.save(application).getId();
-    }
 
     public PageResponse<ApplicationResponse> findAllApplication(int page, int size) {
         Pageable pageable = PageRequest.of(page, size, Sort.by("applicationDate").descending());
@@ -82,7 +74,7 @@ public class ApplicationService {
         application.setCoverLetter(request.coverLetter());
         application.setStatus(request.status());
         application.setApplicationDate(request.applicationDate());
-        application.setJobListing(request.jobListing());
+        application.setJobListing(jobListingRepository.findById(request.jobId()).get());
         applicationRepository.save(application);
 
     }
@@ -98,4 +90,18 @@ public class ApplicationService {
     }
 
 
+    public Integer createApplication(Integer jobId, ApplicationRequest request) {
+
+        JobListing jobListing = jobListingRepository.findById(jobId).get();
+        Application application = new Application();
+        application.setCandidateName(request.candidateName());
+        application.setCandidateEmail(request.candidateEmail());
+        application.setResumeUrl(request.resumeUrl());
+        application.setCoverLetter(request.coverLetter());
+        application.setStatus(request.status());
+        application.setApplicationDate(request.applicationDate());
+        application.setJobListing(jobListing);
+        applicationRepository.save(application);
+        return application.getId();
+    }
 }

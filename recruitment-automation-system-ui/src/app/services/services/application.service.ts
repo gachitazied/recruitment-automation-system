@@ -30,7 +30,7 @@ export class ApplicationService extends BaseService {
   }
 
   /** Path part for operation `createApplication()` */
-  static readonly CreateApplicationPath = '/app/create';
+  static readonly CreateApplicationPath = '/app/create/{jobId}';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.

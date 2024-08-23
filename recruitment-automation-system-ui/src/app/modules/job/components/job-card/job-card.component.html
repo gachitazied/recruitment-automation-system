@@ -1,8 +1,7 @@
 <div
   class="card"
   style="width: 20rem;"
-  [class.border-success]="job.active"
-  [class.border-warning]="job.archived"
+
 >
   <div class="card-body overflow-auto"> <!-- Changed from overflow-scroll to overflow-auto -->
     <h5 class="card-title fs-6 text-nowrap fw-bold mb-1">
@@ -25,6 +24,8 @@
     </p>
   </div>
   <div class="card-footer d-flex gap-2 justify-content-between align-items-center">
-    <button class="btn btn-apply">Apply</button>
+
+    <button (click)="applyForJob()" class="btn btn-apply">Apply</button>
+
   </div>
 </div>

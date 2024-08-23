@@ -16,12 +16,18 @@ import org.springframework.web.bind.annotation.*;
 @Tag(name = "application")
 public class ApplicationController {
     private final ApplicationService applicationService;
-    @PostMapping("/create")
+
+
+    @PostMapping("/create/{jobId}")
     public ResponseEntity<Integer> createApplication(
-            @Valid @RequestBody ApplicationRequest request
-    ) {
-        return ResponseEntity.ok(applicationService.createApplication(request));
+            @PathVariable Integer jobId,
+            @Valid @RequestBody ApplicationRequest request) {
+
+        return ResponseEntity.ok(applicationService.createApplication(jobId, request));
     }
+
+
+
     @GetMapping("/find/all")
     public ResponseEntity<PageResponse<ApplicationResponse>> findAllJobs(
             @RequestParam(name = "page", defaultValue = "0", required = false) int page,

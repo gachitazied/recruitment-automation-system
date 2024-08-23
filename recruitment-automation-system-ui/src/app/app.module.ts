@@ -10,6 +10,7 @@ import { RegisterComponent } from './pages/register/register.component';
 import { ActivateAccountComponent } from './pages/activate-account/activate-account.component';
 import {CodeInputModule} from "angular-code-input";
 import {HttpTokenInterceptor} from "./services/interceptor/http-token.interceptor";
+import {JobRoutingModule} from "./modules/job/job-routing.module";
 
 
 
@@ -26,7 +27,8 @@ import {HttpTokenInterceptor} from "./services/interceptor/http-token.intercepto
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    CodeInputModule
+    CodeInputModule,
+    JobRoutingModule
   ],
   providers: [
     HttpClient,

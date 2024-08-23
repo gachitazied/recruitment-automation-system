@@ -5,7 +5,6 @@ export { ApplicationResponse } from './models/application-response';
 export { AuthenticationRequest } from './models/authentication-request';
 export { AuthenticationResponse } from './models/authentication-response';
 export { CandidateResponse } from './models/candidate-response';
-export { JobListing } from './models/job-listing';
 export { JobListingRequest } from './models/job-listing-request';
 export { JobListingResponse } from './models/job-listing-response';
 export { NotificationRequest } from './models/notification-request';

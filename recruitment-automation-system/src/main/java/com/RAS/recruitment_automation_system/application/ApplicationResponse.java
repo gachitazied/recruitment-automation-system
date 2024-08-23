@@ -17,5 +17,6 @@ public class ApplicationResponse {
     private String coverLetter;
     private String status;
     private Date applicationDate;
-    private JobListing jobListing;
+
+
 }

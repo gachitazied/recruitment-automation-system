@@ -7,7 +7,7 @@ public class NotificationMapper {
     public Notification toNotification(NotificationRequest notificationRequest) {
         return Notification.builder()
                 .message(notificationRequest.message())
-                .isRead(notificationRequest.isRead())
+                .isRead(false)
                 .date(notificationRequest.date())
                 .build();
     }

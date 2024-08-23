@@ -8,6 +8,9 @@ import { MainComponent } from './pages/main/main.component';
 import { JobListComponent } from './pages/job-list/job-list.component';
 import { UserDetailsComponent } from './pages/user-details/user-details.component';
 import {FormsModule} from "@angular/forms";
+import { ApplicationComponent } from './pages/application/application.component';
+import { ApplyManageComponent } from './pages/apply-manage/apply-manage.component';
+import { NotificationComponent } from './pages/notification/notification.component';
 
 
 @NgModule({
@@ -16,12 +19,16 @@ import {FormsModule} from "@angular/forms";
     MenuComponent,
     MainComponent,
     JobListComponent,
-    UserDetailsComponent
+    UserDetailsComponent,
+    ApplicationComponent,
+    ApplyManageComponent,
+    NotificationComponent
   ],
   imports: [
     CommonModule,
     FormsModule,
-    JobRoutingModule
+    JobRoutingModule,
+
   ]
 })
 export class JobModule { }
