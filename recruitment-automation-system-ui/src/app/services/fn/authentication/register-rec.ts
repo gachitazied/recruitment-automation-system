@@ -6,15 +6,15 @@ import { filter, map } from 'rxjs/operators';
 import { StrictHttpResponse } from '../../strict-http-response';
 import { RequestBuilder } from '../../request-builder';
 
-import { AuthenticationRequest } from '../../models/authentication-request';
-import { AuthenticationResponse } from '../../models/authentication-response';
+import { RegistrationRequest } from '../../models/registration-request';
 
-export interface Authenticate$Params {
-      body: AuthenticationRequest
+export interface RegisterRec$Params {
+      body: RegistrationRequest
 }
 
-export function authenticate(http: HttpClient, rootUrl: string, params: Authenticate$Params, context?: HttpContext): Observable<StrictHttpResponse<AuthenticationResponse>> {
-  const rb = new RequestBuilder(rootUrl, authenticate.PATH, 'post');
+export function registerRec(http: HttpClient, rootUrl: string, params: RegisterRec$Params, context?: HttpContext): Observable<StrictHttpResponse<{
+}>> {
+  const rb = new RequestBuilder(rootUrl, registerRec.PATH, 'post');
   if (params) {
     rb.body(params.body, 'application/json');
   }
@@ -24,9 +24,10 @@ export function authenticate(http: HttpClient, rootUrl: string, params: Authenti
   ).pipe(
     filter((r: any): r is HttpResponse<any> => r instanceof HttpResponse),
     map((r: HttpResponse<any>) => {
-      return r as StrictHttpResponse<AuthenticationResponse>;
+      return r as StrictHttpResponse<{
+      }>;
     })
   );
 }
 
-authenticate.PATH = '/auth/authenticate';
+registerRec.PATH = '/auth/register_Rec';

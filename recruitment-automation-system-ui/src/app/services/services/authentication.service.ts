@@ -9,13 +9,17 @@ import { BaseService } from '../base-service';
 import { ApiConfiguration } from '../api-configuration';
 import { StrictHttpResponse } from '../strict-http-response';
 
-import { authenticate } from '../fn/authentication/authenticate';
-import { Authenticate$Params } from '../fn/authentication/authenticate';
+import { authenticateCan } from '../fn/authentication/authenticate-can';
+import { AuthenticateCan$Params } from '../fn/authentication/authenticate-can';
+import { authenticateRec } from '../fn/authentication/authenticate-rec';
+import { AuthenticateRec$Params } from '../fn/authentication/authenticate-rec';
 import { AuthenticationResponse } from '../models/authentication-response';
 import { confirm } from '../fn/authentication/confirm';
 import { Confirm$Params } from '../fn/authentication/confirm';
-import { register } from '../fn/authentication/register';
-import { Register$Params } from '../fn/authentication/register';
+import { registerCan } from '../fn/authentication/register-can';
+import { RegisterCan$Params } from '../fn/authentication/register-can';
+import { registerRec } from '../fn/authentication/register-rec';
+import { RegisterRec$Params } from '../fn/authentication/register-rec';
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService extends BaseService {
@@ -23,56 +27,110 @@ export class AuthenticationService extends BaseService {
     super(config, http);
   }
 
-  /** Path part for operation `register()` */
-  static readonly RegisterPath = '/auth/register';
+  /** Path part for operation `registerRec()` */
+  static readonly RegisterRecPath = '/auth/register_Rec';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `register()` instead.
+   * To access only the response body, use `registerRec()` instead.
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  register$Response(params: Register$Params, context?: HttpContext): Observable<StrictHttpResponse<{
+  registerRec$Response(params: RegisterRec$Params, context?: HttpContext): Observable<StrictHttpResponse<{
 }>> {
-    return register(this.http, this.rootUrl, params, context);
+    return registerRec(this.http, this.rootUrl, params, context);
   }
 
   /**
    * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `register$Response()` instead.
+   * To access the full response (for headers, for example), `registerRec$Response()` instead.
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  register(params: Register$Params, context?: HttpContext): Observable<{
+  registerRec(params: RegisterRec$Params, context?: HttpContext): Observable<{
 }> {
-    return this.register$Response(params, context).pipe(
+    return this.registerRec$Response(params, context).pipe(
       map((r: StrictHttpResponse<{
 }>): {
 } => r.body)
     );
   }
 
-  /** Path part for operation `authenticate()` */
-  static readonly AuthenticatePath = '/auth/authenticate';
+  /** Path part for operation `registerCan()` */
+  static readonly RegisterCanPath = '/auth/register_Can';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `authenticate()` instead.
+   * To access only the response body, use `registerCan()` instead.
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  authenticate$Response(params: Authenticate$Params, context?: HttpContext): Observable<StrictHttpResponse<AuthenticationResponse>> {
-    return authenticate(this.http, this.rootUrl, params, context);
+  registerCan$Response(params: RegisterCan$Params, context?: HttpContext): Observable<StrictHttpResponse<{
+}>> {
+    return registerCan(this.http, this.rootUrl, params, context);
   }
 
   /**
    * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `authenticate$Response()` instead.
+   * To access the full response (for headers, for example), `registerCan$Response()` instead.
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  authenticate(params: Authenticate$Params, context?: HttpContext): Observable<AuthenticationResponse> {
-    return this.authenticate$Response(params, context).pipe(
+  registerCan(params: RegisterCan$Params, context?: HttpContext): Observable<{
+}> {
+    return this.registerCan$Response(params, context).pipe(
+      map((r: StrictHttpResponse<{
+}>): {
+} => r.body)
+    );
+  }
+
+  /** Path part for operation `authenticateRec()` */
+  static readonly AuthenticateRecPath = '/auth/authenticate_Rec';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `authenticateRec()` instead.
+   *
+   * This method sends `application/json` and handles request body of type `application/json`.
+   */
+  authenticateRec$Response(params: AuthenticateRec$Params, context?: HttpContext): Observable<StrictHttpResponse<AuthenticationResponse>> {
+    return authenticateRec(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `authenticateRec$Response()` instead.
+   *
+   * This method sends `application/json` and handles request body of type `application/json`.
+   */
+  authenticateRec(params: AuthenticateRec$Params, context?: HttpContext): Observable<AuthenticationResponse> {
+    return this.authenticateRec$Response(params, context).pipe(
+      map((r: StrictHttpResponse<AuthenticationResponse>): AuthenticationResponse => r.body)
+    );
+  }
+
+  /** Path part for operation `authenticateCan()` */
+  static readonly AuthenticateCanPath = '/auth/authenticate_Can';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `authenticateCan()` instead.
+   *
+   * This method sends `application/json` and handles request body of type `application/json`.
+   */
+  authenticateCan$Response(params: AuthenticateCan$Params, context?: HttpContext): Observable<StrictHttpResponse<AuthenticationResponse>> {
+    return authenticateCan(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `authenticateCan$Response()` instead.
+   *
+   * This method sends `application/json` and handles request body of type `application/json`.
+   */
+  authenticateCan(params: AuthenticateCan$Params, context?: HttpContext): Observable<AuthenticationResponse> {
+    return this.authenticateCan$Response(params, context).pipe(
       map((r: StrictHttpResponse<AuthenticationResponse>): AuthenticationResponse => r.body)
     );
   }

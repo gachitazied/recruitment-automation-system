@@ -4,12 +4,11 @@ import {Router} from "@angular/router";
 import {AuthenticationService} from "../../services/services/authentication.service";
 
 @Component({
-  selector: 'app-register',
-  templateUrl: './register.component.html',
-  styleUrls: ['./register.component.scss']
+  selector: 'app-register-recruiter',
+  templateUrl: './register-recruiter.component.html',
+  styleUrls: ['./register-recruiter.component.css']
 })
-export class RegisterComponent {
-
+export class RegisterRecruiterComponent {
   registerRequest: RegistrationRequest = {email: '', password: '', username: ''};
   errorMsg: Array<string> = [];
 
@@ -20,17 +19,17 @@ export class RegisterComponent {
   }
 
   login() {
-    this.router.navigate(['login']);
+    this.router.navigate(['loginRecruiter']);
   }
 
   register() {
     this.errorMsg = [];
-    this.authService.registerCan({
+    this.authService.registerRec({
       body: this.registerRequest
     })
       .subscribe({
         next: () => {
-          this.router.navigate(['activate-account']);
+          this.router.navigate(['activate-account-rec']);
         },
         error: (err) => {
           this.errorMsg = err.error.validationErrors;

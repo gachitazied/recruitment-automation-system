@@ -206,12 +206,12 @@
         }
       }
     },
-    "/auth/register": {
+    "/auth/register_Rec": {
       "post": {
         "tags": [
           "Authentication"
         ],
-        "operationId": "register",
+        "operationId": "register_Rec",
         "requestBody": {
           "content": {
             "application/json": {
@@ -236,12 +236,72 @@
         }
       }
     },
-    "/auth/authenticate": {
+    "/auth/register_Can": {
       "post": {
         "tags": [
           "Authentication"
         ],
-        "operationId": "authenticate",
+        "operationId": "register_Can",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RegistrationRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/auth/authenticate_Rec": {
+      "post": {
+        "tags": [
+          "Authentication"
+        ],
+        "operationId": "authenticate_Rec",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AuthenticationRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthenticationResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/auth/authenticate_Can": {
+      "post": {
+        "tags": [
+          "Authentication"
+        ],
+        "operationId": "authenticate_Can",
         "requestBody": {
           "content": {
             "application/json": {

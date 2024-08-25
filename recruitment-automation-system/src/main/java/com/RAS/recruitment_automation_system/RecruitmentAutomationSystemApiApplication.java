@@ -19,15 +19,16 @@ public class RecruitmentAutomationSystemApiApplication {
 	}
 
 	@Bean
-	public CommandLineRunner runner(RoleRepository roleRepository)
-	{
+	public CommandLineRunner runner(RoleRepository roleRepository) {
 		return args -> {
-			if (roleRepository.findByName("USER").isEmpty())
-			{
-				roleRepository.save(Role.builder().name("USER").build());
+			if (roleRepository.findByName("CANDIDATE").isEmpty()) {
+				roleRepository.save(Role.builder().name("CANDIDATE").build());
+			}
+			if (roleRepository.findByName("RECRUITER").isEmpty()) {
+				roleRepository.save(Role.builder().name("RECRUITER").build());
 			}
 		};
-
 	}
+
 
 }

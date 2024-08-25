@@ -11,6 +11,10 @@ import { ActivateAccountComponent } from './pages/activate-account/activate-acco
 import {CodeInputModule} from "angular-code-input";
 import {HttpTokenInterceptor} from "./services/interceptor/http-token.interceptor";
 import {JobRoutingModule} from "./modules/job/job-routing.module";
+import { LoginRecruiterComponent } from './pages/login-recruiter/login-recruiter.component';
+import { RegisterRecruiterComponent } from './pages/register-recruiter/register-recruiter.component';
+import {TableBordModule} from "./modules/table-bord/table-bord.module";
+import { ActivateAccountRecComponent } from './pages/activate-account-rec/activate-account-rec.component';
 
 
 
@@ -20,6 +24,9 @@ import {JobRoutingModule} from "./modules/job/job-routing.module";
     LoginComponent,
     RegisterComponent,
     ActivateAccountComponent,
+    LoginRecruiterComponent,
+    RegisterRecruiterComponent,
+    ActivateAccountRecComponent,
 
   ],
   imports: [
@@ -28,7 +35,8 @@ import {JobRoutingModule} from "./modules/job/job-routing.module";
     HttpClientModule,
     FormsModule,
     CodeInputModule,
-    JobRoutingModule
+    JobRoutingModule,
+    TableBordModule
   ],
   providers: [
     HttpClient,

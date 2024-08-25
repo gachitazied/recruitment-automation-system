@@ -1,15 +1,15 @@
-import {Component} from '@angular/core';
-import {Router} from '@angular/router';
-import {AuthenticationService} from '../../services/services/authentication.service';
-import {AuthenticationRequest} from '../../services/models/authentication-request';
-import {TokenService} from '../../services/token/token.service';
+import { Component } from '@angular/core';
+import {AuthenticationRequest} from "../../services/models/authentication-request";
+import {Router} from "@angular/router";
+import {AuthenticationService} from "../../services/services/authentication.service";
+import {TokenService} from "../../services/token/token.service";
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  selector: 'app-login-recruiter',
+  templateUrl: './login-recruiter.component.html',
+  styleUrls: ['./login-recruiter.component.css']
 })
-export class LoginComponent {
+export class LoginRecruiterComponent {
 
   authRequest: AuthenticationRequest = {email: '', password: ''};
   errorMsg: Array<string> = [];
@@ -23,13 +23,13 @@ export class LoginComponent {
 
   login() {
     this.errorMsg = [];
-    this.authService.authenticateCan({
+    this.authService.authenticateRec({
       body: this.authRequest
     }).subscribe({
       next: (res) => {
         this.tokenService.token = res.token as string;
 
-        this.router.navigate(['jobs']);
+        this.router.navigate(['tableboard']);
       },
       error: (err) => {
         console.log(err);
@@ -43,6 +43,6 @@ export class LoginComponent {
   }
 
   register() {
-    this.router.navigate(['register']);
+    this.router.navigate(['registerRecruiter']);
   }
 }

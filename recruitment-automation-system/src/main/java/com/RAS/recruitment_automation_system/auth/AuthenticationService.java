@@ -47,8 +47,8 @@ public class AuthenticationService {
 
     private String activationUrl;
 
-    public void register(RegistrationRequest request) throws MessagingException {
-        var userRole = roleRepository.findByName("USER")
+    public void register_Can(RegistrationRequest request) throws MessagingException {
+        var userRole = roleRepository.findByName("CANDIDATE")
                 .orElseThrow(() -> new IllegalStateException("User role not found"));
         var user = User.builder()
                 .username(request.getUsername())
@@ -60,8 +60,21 @@ public class AuthenticationService {
                 .build();
         userRepository.save(user);
         sendValidationEmail(user);
+    }
 
-
+    public void register_Rec(RegistrationRequest request) throws MessagingException {
+        var userRole = roleRepository.findByName("RECRUITER")
+                .orElseThrow(() -> new IllegalStateException("User role not found"));
+        var user = User.builder()
+                .username(request.getUsername())
+                .email(request.getEmail())
+                .password(passwordEncoder.encode(request.getPassword()))
+                .roles(userRole)
+                .accountLocked(false)
+                .enabled(false)
+                .build();
+        userRepository.save(user);
+        sendValidationEmail(user);
     }
 
 
@@ -105,7 +118,20 @@ public class AuthenticationService {
         return codeBuilder.toString();
     }
 
-    public AuthenticationResponse authenticate(AuthenticationRequest request) {
+    public AuthenticationResponse authenticate_Can(AuthenticationRequest request) {
+        var auth = autenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(request.getEmail(),request.getPassword()));
+        var claims = new HashMap<String, Object>();
+        var user = ((User)auth.getPrincipal());
+
+        claims.put("Username",user.getEmail());
+
+        var jwtToken = jwtService.generateToken(claims, user);
+
+        return AuthenticationResponse.builder().token(jwtToken).build();
+    }
+
+    public AuthenticationResponse authenticate_Rec(AuthenticationRequest request) {
         var auth = autenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(request.getEmail(),request.getPassword()));
         var claims = new HashMap<String, Object>();

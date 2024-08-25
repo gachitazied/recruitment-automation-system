@@ -8,13 +8,13 @@ import { RequestBuilder } from '../../request-builder';
 
 import { RegistrationRequest } from '../../models/registration-request';
 
-export interface Register$Params {
+export interface RegisterCan$Params {
       body: RegistrationRequest
 }
 
-export function register(http: HttpClient, rootUrl: string, params: Register$Params, context?: HttpContext): Observable<StrictHttpResponse<{
+export function registerCan(http: HttpClient, rootUrl: string, params: RegisterCan$Params, context?: HttpContext): Observable<StrictHttpResponse<{
 }>> {
-  const rb = new RequestBuilder(rootUrl, register.PATH, 'post');
+  const rb = new RequestBuilder(rootUrl, registerCan.PATH, 'post');
   if (params) {
     rb.body(params.body, 'application/json');
   }
@@ -30,4 +30,4 @@ export function register(http: HttpClient, rootUrl: string, params: Register$Par
   );
 }
 
-register.PATH = '/auth/register';
+registerCan.PATH = '/auth/register_Can';

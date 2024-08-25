@@ -18,20 +18,34 @@ public class AuthenticationController {
 
     private final AuthenticationService service;
 
-    @PostMapping("/register")
+    @PostMapping("/register_Can")
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public ResponseEntity<?> register(
+    public ResponseEntity<?> register_Can(
             @RequestBody @Valid RegistrationRequest request) throws MessagingException {
-        service.register(request);
+        service.register_Can(request);
+
+        return ResponseEntity.accepted().build();
+    }
+    @PostMapping("/register_Rec")
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    public ResponseEntity<?> register_Rec(
+            @RequestBody @Valid RegistrationRequest request) throws MessagingException {
+        service.register_Rec(request);
 
         return ResponseEntity.accepted().build();
     }
 
-    @PostMapping("/authenticate")
-    public ResponseEntity<AuthenticationResponse> authenticate(
+    @PostMapping("/authenticate_Can")
+    public ResponseEntity<AuthenticationResponse> authenticate_Can(
             @RequestBody @Valid AuthenticationRequest request)
     {
-        return ResponseEntity.ok(service.authenticate(request));
+        return ResponseEntity.ok(service.authenticate_Can(request));
+    }
+    @PostMapping("/authenticate_Rec")
+    public ResponseEntity<AuthenticationResponse> authenticate_Rec(
+            @RequestBody @Valid AuthenticationRequest request)
+    {
+        return ResponseEntity.ok(service.authenticate_Rec(request));
     }
 
     @GetMapping("/activate-account")
