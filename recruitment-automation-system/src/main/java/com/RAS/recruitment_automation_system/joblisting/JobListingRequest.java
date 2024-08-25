@@ -1,5 +1,6 @@
 package com.RAS.recruitment_automation_system.joblisting;
 
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 
@@ -7,23 +8,24 @@ import java.sql.Date;
 
 public record JobListingRequest(
         Integer id,
-        @NotNull(message = "100")
-        @NotEmpty(message = "100")
+        @NotNull(message = "title cannot be null")
+        @NotEmpty(message = "title cannot be null")
         String title,
-        @NotNull(message = "101")
-        @NotEmpty(message = "101")
+        @NotNull(message = "description cannot be null")
+        @NotEmpty(message = "description cannot be null")
         String description,
-        @NotNull(message = "102")
-        @NotEmpty(message = "102")
+        @NotNull(message = "location cannot be null")
+        @NotEmpty(message = "location cannot be null")
         String location,
-        @NotNull(message = "103")
-        @NotEmpty(message = "103")
+        @NotNull(message = "department cannot be null")
+        @NotEmpty(message = "department cannot be null")
         String department,
-        @NotNull(message = "104")
-        @NotEmpty(message = "104")
+        @NotNull(message = "requirements cannot be null")
+        @NotEmpty(message = "requirements cannot be null")
         String requirements,
 
         Date postedDate,
+
         Date closingDate
 ) {
 
