@@ -14,7 +14,7 @@ const routes: Routes = [
 
         { path: 'jobsBord', component: JobListBordComponent },
         { path: 'add-job', component: ManageJobsBordComponent },
-        {path: 'edit-job/:job_id', component: UpdateJobsBordComponent}
+        {path: 'edit-job/:id', component: UpdateJobsBordComponent}
 
     ]
   }
