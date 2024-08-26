@@ -24,6 +24,7 @@ public class AuthenticationController {
             @RequestBody @Valid RegistrationRequest request) throws MessagingException {
         service.register_Can(request);
 
+
         return ResponseEntity.accepted().build();
     }
     @PostMapping("/register_Rec")

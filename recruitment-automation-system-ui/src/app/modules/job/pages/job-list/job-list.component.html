@@ -3,7 +3,14 @@
 <div *ngIf="message" class="alert" [class.alert-danger]="level==='error'" [class.alert-success]="level==='success'" role="alert">
   <p>{{message}}</p>
 </div>
-
+<div class="search-container">
+  <input type="text" [(ngModel)]="searchTitle" placeholder="Search by job title" />
+  <button class="btn btn-primary" (click)="searchJobs()">Search</button>
+  <div class="filter-buttons">
+    <button class="btn btn-secondary" (click)="applyFilter('newest')">Newest</button>
+    <button class="btn btn-secondary" (click)="applyFilter('oldest')">Oldest</button>
+  </div>
+</div>
 <hr>
 <div class="d-flex justify-content-start gap-3 flex-wrap">
   <div  *ngFor="let job of jobResponse.content">

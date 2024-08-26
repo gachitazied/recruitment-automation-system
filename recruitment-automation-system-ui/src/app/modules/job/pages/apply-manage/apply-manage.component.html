@@ -2,7 +2,7 @@
   <form (ngSubmit)="submitApplication()" #applicationForm="ngForm" class="w-75 p-4 border rounded shadow-sm bg-light">
     <h2 class="text-center mb-4">Apply for Job</h2>
 
-    <!-- Job ID (hidden field) -->
+
     <input type="hidden" [(ngModel)]="jobId" name="jobId" />
 
 
@@ -18,7 +18,7 @@
       />
     </div>
 
-    <!-- Candidate Email -->
+
     <div class="form-group mb-3">
       <label for="candidateEmail" class="form-label">Candidate Email:</label>
       <input
@@ -31,7 +31,7 @@
       />
     </div>
 
-    <!-- Resume URL -->
+
     <div class="form-group mb-3">
       <label for="resumeUrl" class="form-label">Resume URL:</label>
       <input
@@ -44,7 +44,7 @@
       />
     </div>
 
-    <!-- Cover Letter -->
+
     <div class="form-group mb-3">
       <label for="coverLetter" class="form-label">Cover Letter:</label>
       <textarea

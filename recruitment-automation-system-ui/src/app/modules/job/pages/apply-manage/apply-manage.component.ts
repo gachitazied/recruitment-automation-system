@@ -18,13 +18,13 @@ export class ApplyManageComponent implements OnInit {
   candidateEmail: string = '';
   resumeUrl: string = '';
   coverLetter: string = '';
-  status: string = 'preselection';
+  status: string = 'preselected';
 
   constructor(
       private route: ActivatedRoute,
       private router: Router,
       private applicationService: ApplicationService,
-      private notificationService: NotificationService // Injecter le service de notification
+      private notificationService: NotificationService
   ) {}
 
   ngOnInit(): void {
@@ -75,7 +75,7 @@ export class ApplyManageComponent implements OnInit {
   sendNotification() {
     const notificationRequest = {
       message: 'Application created successfully',
-      isRead: false,  // Assurez-vous que ce champ est défini comme Boolean
+      isRead: false,
 
     };
 
