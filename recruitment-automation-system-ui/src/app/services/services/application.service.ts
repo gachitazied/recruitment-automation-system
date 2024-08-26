@@ -13,10 +13,12 @@ import { createApplication } from '../fn/application/create-application';
 import { CreateApplication$Params } from '../fn/application/create-application';
 import { deleteApplicationById } from '../fn/application/delete-application-by-id';
 import { DeleteApplicationById$Params } from '../fn/application/delete-application-by-id';
-import { findAllJobs1 } from '../fn/application/find-all-jobs-1';
-import { FindAllJobs1$Params } from '../fn/application/find-all-jobs-1';
-import { findJobsById1 } from '../fn/application/find-jobs-by-id-1';
-import { FindJobsById1$Params } from '../fn/application/find-jobs-by-id-1';
+import { findAllApplication } from '../fn/application/find-all-application';
+import { FindAllApplication$Params } from '../fn/application/find-all-application';
+import { findApplicationById } from '../fn/application/find-application-by-id';
+import { FindApplicationById$Params } from '../fn/application/find-application-by-id';
+import { getStatusStats } from '../fn/application/get-status-stats';
+import { GetStatusStats$Params } from '../fn/application/get-status-stats';
 import { PageResponseApplicationResponse } from '../models/page-response-application-response';
 import { updateApplicationById } from '../fn/application/update-application-by-id';
 import { UpdateApplicationById$Params } from '../fn/application/update-application-by-id';
@@ -104,52 +106,85 @@ export class ApplicationService extends BaseService {
     );
   }
 
-  /** Path part for operation `findJobsById1()` */
-  static readonly FindJobsById1Path = '/app/find/{appId}';
+  /** Path part for operation `getStatusStats()` */
+  static readonly GetStatusStatsPath = '/app/status-stats';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `findJobsById1()` instead.
+   * To access only the response body, use `getStatusStats()` instead.
    *
    * This method doesn't expect any request body.
    */
-  findJobsById1$Response(params: FindJobsById1$Params, context?: HttpContext): Observable<StrictHttpResponse<PageResponseApplicationResponse>> {
-    return findJobsById1(this.http, this.rootUrl, params, context);
+  getStatusStats$Response(params?: GetStatusStats$Params, context?: HttpContext): Observable<StrictHttpResponse<{
+[key: string]: number;
+}>> {
+    return getStatusStats(this.http, this.rootUrl, params, context);
   }
 
   /**
    * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `findJobsById1$Response()` instead.
+   * To access the full response (for headers, for example), `getStatusStats$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
-  findJobsById1(params: FindJobsById1$Params, context?: HttpContext): Observable<PageResponseApplicationResponse> {
-    return this.findJobsById1$Response(params, context).pipe(
+  getStatusStats(params?: GetStatusStats$Params, context?: HttpContext): Observable<{
+[key: string]: number;
+}> {
+    return this.getStatusStats$Response(params, context).pipe(
+      map((r: StrictHttpResponse<{
+[key: string]: number;
+}>): {
+[key: string]: number;
+} => r.body)
+    );
+  }
+
+  /** Path part for operation `findApplicationById()` */
+  static readonly FindApplicationByIdPath = '/app/find/{appId}';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `findApplicationById()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  findApplicationById$Response(params: FindApplicationById$Params, context?: HttpContext): Observable<StrictHttpResponse<PageResponseApplicationResponse>> {
+    return findApplicationById(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `findApplicationById$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  findApplicationById(params: FindApplicationById$Params, context?: HttpContext): Observable<PageResponseApplicationResponse> {
+    return this.findApplicationById$Response(params, context).pipe(
       map((r: StrictHttpResponse<PageResponseApplicationResponse>): PageResponseApplicationResponse => r.body)
     );
   }
 
-  /** Path part for operation `findAllJobs1()` */
-  static readonly FindAllJobs1Path = '/app/find/all';
+  /** Path part for operation `findAllApplication()` */
+  static readonly FindAllApplicationPath = '/app/find/all';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `findAllJobs1()` instead.
+   * To access only the response body, use `findAllApplication()` instead.
    *
    * This method doesn't expect any request body.
    */
-  findAllJobs1$Response(params?: FindAllJobs1$Params, context?: HttpContext): Observable<StrictHttpResponse<PageResponseApplicationResponse>> {
-    return findAllJobs1(this.http, this.rootUrl, params, context);
+  findAllApplication$Response(params?: FindAllApplication$Params, context?: HttpContext): Observable<StrictHttpResponse<PageResponseApplicationResponse>> {
+    return findAllApplication(this.http, this.rootUrl, params, context);
   }
 
   /**
    * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `findAllJobs1$Response()` instead.
+   * To access the full response (for headers, for example), `findAllApplication$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
-  findAllJobs1(params?: FindAllJobs1$Params, context?: HttpContext): Observable<PageResponseApplicationResponse> {
-    return this.findAllJobs1$Response(params, context).pipe(
+  findAllApplication(params?: FindAllApplication$Params, context?: HttpContext): Observable<PageResponseApplicationResponse> {
+    return this.findAllApplication$Response(params, context).pipe(
       map((r: StrictHttpResponse<PageResponseApplicationResponse>): PageResponseApplicationResponse => r.body)
     );
   }

@@ -10,6 +10,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
+
 @RestController
 @RequestMapping("/app")
 @RequiredArgsConstructor
@@ -29,14 +31,14 @@ public class ApplicationController {
 
 
     @GetMapping("/find/all")
-    public ResponseEntity<PageResponse<ApplicationResponse>> findAllJobs(
+    public ResponseEntity<PageResponse<ApplicationResponse>> findAllApplication(
             @RequestParam(name = "page", defaultValue = "0", required = false) int page,
             @RequestParam(name = "size", defaultValue = "10", required = false) int size
     ) {
         return ResponseEntity.ok(applicationService.findAllApplication(page, size));
     }
     @GetMapping("/find/{appId}")
-    public ResponseEntity<PageResponse<ApplicationResponse>> findJobsById(
+    public ResponseEntity<PageResponse<ApplicationResponse>> findApplicationById(
             @PathVariable("appId") Integer appId,
             @RequestParam(name = "page", defaultValue = "0", required = false) int page,
             @RequestParam(name = "size", defaultValue = "10", required = false) int size)
@@ -67,10 +69,16 @@ public class ApplicationController {
     @PatchMapping("/UpdateStatus/{appId}")
     public ResponseEntity<Void> UpdateCandidateStatus(
             @PathVariable("appId") Integer appId,
-            @Valid @RequestBody ApplicationRequest request
-    )
-    {
-        applicationService.updateCandidateStatus(appId,request);
+            @RequestBody String status
+    ) {
+        applicationService.updateCandidateStatus(appId, status);
         return ResponseEntity.noContent().build();
     }
+
+    @GetMapping("/status-stats")
+    public ResponseEntity<Map<String, Long>> getStatusStats() {
+        Map<String, Long> stats = applicationService.getStatusCounts();
+        return ResponseEntity.ok(stats);
+    }
+
 }

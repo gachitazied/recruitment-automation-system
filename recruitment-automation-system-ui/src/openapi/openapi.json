@@ -491,7 +491,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/ApplicationRequest"
+                "type": "string"
               }
             }
           },
@@ -571,6 +571,90 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/NotificationResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/jobs/statistics": {
+      "get": {
+        "tags": [
+          "JobListing"
+        ],
+        "operationId": "getJobStatisticsByDate",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "integer",
+                    "format": "int64"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/jobs/search": {
+      "get": {
+        "tags": [
+          "JobListing"
+        ],
+        "operationId": "searchJobs",
+        "parameters": [
+          {
+            "name": "title",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": ""
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 0
+            }
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 10
+            }
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": "newest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PageResponseJobListingResponse"
                 }
               }
             }
@@ -787,12 +871,36 @@
         }
       }
     },
+    "/app/status-stats": {
+      "get": {
+        "tags": [
+          "application"
+        ],
+        "operationId": "getStatusStats",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "integer",
+                    "format": "int64"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/app/find/{appId}": {
       "get": {
         "tags": [
           "application"
         ],
-        "operationId": "findJobsById_1",
+        "operationId": "findApplicationById",
         "parameters": [
           {
             "name": "appId",
@@ -843,7 +951,7 @@
         "tags": [
           "application"
         ],
-        "operationId": "findAllJobs_1",
+        "operationId": "findAllApplication",
         "parameters": [
           {
             "name": "page",

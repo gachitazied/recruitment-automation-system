@@ -18,4 +18,5 @@ WHERE j.id = :jobId
     Page<JobListing> findAllByJobId(@Param("jobId") int jobId, Pageable pageable);
 
 
+    Page<JobListing> findByTitleContainingIgnoreCase(String title, Pageable pageable);
 }

@@ -15,7 +15,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.sql.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
@@ -82,12 +85,13 @@ public class ApplicationService {
 
         applicationRepository.deleteById(appId);
     }
-    public void updateCandidateStatus(Integer appId,ApplicationRequest request){
-        Application application =applicationRepository.findById(appId)
-                .orElseThrow(()-> new RuntimeException("application not find"));
-        application.setStatus(request.status());
+    public void updateCandidateStatus(Integer appId, String status) {
+        Application application = applicationRepository.findById(appId)
+                .orElseThrow(() -> new RuntimeException("Application not found"));
+        application.setStatus(status);
         applicationRepository.save(application);
     }
+
 
 
     public Integer createApplication(Integer jobId, ApplicationRequest request) {
@@ -103,5 +107,14 @@ public class ApplicationService {
         application.setJobListing(jobListing);
         applicationRepository.save(application);
         return application.getId();
+    }
+
+    public Map<String, Long> getStatusCounts() {
+        Map<String, Long> statusCounts = new HashMap<>();
+        statusCounts.put("Reviewed", applicationRepository.countByStatus("Reviewed"));
+        statusCounts.put("Interviewed", applicationRepository.countByStatus("Interviewed"));
+        statusCounts.put("Accepted", applicationRepository.countByStatus("Accepted"));
+        statusCounts.put("Rejected", applicationRepository.countByStatus("Rejected"));
+        return statusCounts;
     }
 }

@@ -1,6 +1,6 @@
 <div class="job-listing-header text-center mb-4">
   <h1 class="display-4">Design Your Job</h1>
-  <button class="btn btn-primary" [routerLink]="['/jobsBord']">Go back</button>
+
 </div>
 
 <form (ngSubmit)="savejobs()" class="job-listing-form mx-auto my-4 p-4 border rounded shadow-lg">
@@ -43,7 +43,12 @@
     <input [(ngModel)]="savejobRequest.closingDate" type="date" id="closingDate" class="form-control" name="closingDate" required>
   </div>
 
-  <button type="submit" class="btn btn-primary">Submit</button>
+  <div class="form-actions">
+    <button type="submit" class="btn btn-primary">Add Job</button>
+    <button type="button" class="btn btn-cancel" (click)="goBack()">Cancel</button>
+  </div>
+
+
 </form>
 
 

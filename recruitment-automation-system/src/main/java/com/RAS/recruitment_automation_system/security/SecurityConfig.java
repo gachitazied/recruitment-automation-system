@@ -32,6 +32,7 @@ public class SecurityConfig {
                                         "/auth/**",
                                         "/jobs/**",
                                         "/notifications/**",
+                                        "/applications/**",
                                         "/v2/api-docs",
                                         "/v3/api-docs",
                                         "/v3/api-docs/**",

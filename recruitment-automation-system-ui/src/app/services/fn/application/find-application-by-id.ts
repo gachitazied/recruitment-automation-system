@@ -8,14 +8,14 @@ import { RequestBuilder } from '../../request-builder';
 
 import { PageResponseApplicationResponse } from '../../models/page-response-application-response';
 
-export interface FindJobsById1$Params {
+export interface FindApplicationById$Params {
   appId: number;
   page?: number;
   size?: number;
 }
 
-export function findJobsById1(http: HttpClient, rootUrl: string, params: FindJobsById1$Params, context?: HttpContext): Observable<StrictHttpResponse<PageResponseApplicationResponse>> {
-  const rb = new RequestBuilder(rootUrl, findJobsById1.PATH, 'get');
+export function findApplicationById(http: HttpClient, rootUrl: string, params: FindApplicationById$Params, context?: HttpContext): Observable<StrictHttpResponse<PageResponseApplicationResponse>> {
+  const rb = new RequestBuilder(rootUrl, findApplicationById.PATH, 'get');
   if (params) {
     rb.path('appId', params.appId, {});
     rb.query('page', params.page, {});
@@ -32,4 +32,4 @@ export function findJobsById1(http: HttpClient, rootUrl: string, params: FindJob
   );
 }
 
-findJobsById1.PATH = '/app/find/{appId}';
+findApplicationById.PATH = '/app/find/{appId}';

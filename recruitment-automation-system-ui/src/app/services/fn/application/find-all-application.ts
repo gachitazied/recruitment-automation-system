@@ -8,13 +8,13 @@ import { RequestBuilder } from '../../request-builder';
 
 import { PageResponseApplicationResponse } from '../../models/page-response-application-response';
 
-export interface FindAllJobs1$Params {
+export interface FindAllApplication$Params {
   page?: number;
   size?: number;
 }
 
-export function findAllJobs1(http: HttpClient, rootUrl: string, params?: FindAllJobs1$Params, context?: HttpContext): Observable<StrictHttpResponse<PageResponseApplicationResponse>> {
-  const rb = new RequestBuilder(rootUrl, findAllJobs1.PATH, 'get');
+export function findAllApplication(http: HttpClient, rootUrl: string, params?: FindAllApplication$Params, context?: HttpContext): Observable<StrictHttpResponse<PageResponseApplicationResponse>> {
+  const rb = new RequestBuilder(rootUrl, findAllApplication.PATH, 'get');
   if (params) {
     rb.query('page', params.page, {});
     rb.query('size', params.size, {});
@@ -30,4 +30,4 @@ export function findAllJobs1(http: HttpClient, rootUrl: string, params?: FindAll
   );
 }
 
-findAllJobs1.PATH = '/app/find/all';
+findAllApplication.PATH = '/app/find/all';

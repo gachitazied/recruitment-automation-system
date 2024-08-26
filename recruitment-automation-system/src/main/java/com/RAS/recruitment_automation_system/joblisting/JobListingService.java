@@ -10,7 +10,11 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+
+import java.sql.Date;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -82,5 +86,37 @@ public class JobListingService {
     public void deleteJobListingById(Integer jobId) {
 
         jobListingRepository.deleteById(jobId);
+    }
+
+    public PageResponse<JobListingResponse> searchJobsByTitle(String title, int page, int size, String sort) {
+        Pageable pageable;
+        if ("oldest".equalsIgnoreCase(sort)) {
+            pageable = PageRequest.of(page, size, Sort.by(Sort.Direction.ASC, "postedDate"));
+        } else {
+            pageable = PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, "postedDate"));
+        }
+        Page<JobListing> jobPage = jobListingRepository.findByTitleContainingIgnoreCase(title, pageable);
+        List<JobListingResponse> jobResponses = jobPage.stream()
+                .map(jobListingMapper::toJobListingResponse)
+                .collect(Collectors.toList());
+
+        return new PageResponse<>(
+                jobResponses,
+                jobPage.getNumber(),
+                jobPage.getSize(),
+                jobPage.getTotalElements(),
+                jobPage.getTotalPages(),
+                jobPage.isFirst(),
+                jobPage.isLast()
+        );
+
+    }
+
+
+    public Map<Date, Long> getJobStatisticsByDate() {
+
+        List<JobListing> jobListings = jobListingRepository.findAll();
+        return jobListings.stream()
+                .collect(Collectors.groupingBy(JobListing::getPostedDate, Collectors.counting()));
     }
 }

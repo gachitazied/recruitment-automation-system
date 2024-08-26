@@ -11,6 +11,10 @@ import { JobCardBordComponent } from './components/job-card-bord/job-card-bord.c
 import { JobListBordComponent } from './pages/job-list-bord/job-list-bord.component';
 import { ManageJobsBordComponent } from './pages/manage-jobs-bord/manage-jobs-bord.component';
 import { UpdateJobsBordComponent } from './pages/update-jobs-bord/update-jobs-bord.component';
+import { ApplicationCardBordComponent } from './components/application-card-bord/application-card-bord.component';
+import { ApplicationListBordComponent } from './pages/application-list-bord/application-list-bord.component';
+import {Chart} from "chart.js";
+import {StaticApplicationComponent} from "./pages/static-application/static-application.component";
 
 
 
@@ -21,7 +25,10 @@ import { UpdateJobsBordComponent } from './pages/update-jobs-bord/update-jobs-bo
     JobCardBordComponent,
     JobListBordComponent,
     ManageJobsBordComponent,
-    UpdateJobsBordComponent
+    UpdateJobsBordComponent,
+    ApplicationCardBordComponent,
+    ApplicationListBordComponent,
+    StaticApplicationComponent
   ],
   imports: [
     CommonModule,

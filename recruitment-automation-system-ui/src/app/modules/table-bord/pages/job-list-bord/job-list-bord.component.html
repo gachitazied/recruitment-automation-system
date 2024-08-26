@@ -1,13 +1,21 @@
-
 <div *ngIf="message" class="alert" [class.alert-danger]="level==='error'" [class.alert-success]="level==='success'" role="alert">
   <p>{{message}}</p>
 </div>
-<div class="job-listing-header">
-  <button class="btn btn-primary" [routerLink]="['/add-job']">Add New Job</button>
+
+<div class="search-container">
+  <input type="text" [(ngModel)]="searchTitle" placeholder="Search by job title" />
+  <button class="btn btn-primary" (click)="searchJobs()">Search</button>
+  <div class="filter-buttons">
+    <button class="btn btn-secondary" (click)="applyFilter('newest')">Newest</button>
+    <button class="btn btn-secondary" (click)="applyFilter('oldest')">Oldest</button>
+    <button class="btn btn-primary" [routerLink]="['/add-job']">Add New</button>
+  </div>
 </div>
+
+
 <hr>
 <div class="d-flex justify-content-start gap-3 flex-wrap">
-  <div  *ngFor="let job of jobResponse.content">
+  <div *ngFor="let job of jobResponse.content">
     <app-job-card-bord [job]="job"></app-job-card-bord>
   </div>
 </div>
@@ -15,57 +23,27 @@
   <nav aria-label="Page navigation example">
     <ul class="pagination">
       <li class="page-item">
-        <a
-          (click)="goToFirstPage()"
-          class="page-link"
-          href="javascript:void(0)"
-          aria-label="Previous"
-          [class.disabled]="page === 0"
-        >
+        <a (click)="goToFirstPage()" class="page-link" href="javascript:void(0)" aria-label="Previous" [class.disabled]="page === 0">
           <i class="fa-solid fa-angles-left"></i>
         </a>
       </li>
       <li class="page-item">
-        <a
-          (click)="goToPreviousPage()"
-          class="page-link"
-          href="javascript:void(0)"
-          aria-label="Previous"
-          [class.disabled]="page === 0"
-        >
+        <a (click)="goToPreviousPage()" class="page-link" href="javascript:void(0)" aria-label="Previous" [class.disabled]="page === 0">
           <i class="fa-solid fa-angle-left"></i>
         </a>
       </li>
-      <li
-        class="page-item"
-        *ngFor="let pageIndex of pages"
-      >
-        <a
-          (click)="gotToPage(pageIndex)"
-          class="page-link"
-          [class.active]="page === pageIndex"
-          href="javascript:void(0)"
-        >{{ pageIndex + 1 }}</a>
+      <li class="page-item" *ngFor="let pageIndex of pages">
+        <a (click)="gotToPage(pageIndex)" class="page-link" [class.active]="page === pageIndex" href="javascript:void(0)">
+          {{ pageIndex + 1 }}
+        </a>
       </li>
       <li class="page-item">
-        <a
-          (click)="goToNextPage()"
-          class="page-link"
-          href="javascript:void(0)"
-          aria-label="Next"
-          [class.disabled]="isLastPage"
-        >
+        <a (click)="goToNextPage()" class="page-link" href="javascript:void(0)" aria-label="Next" [class.disabled]="isLastPage">
           <i class="fa-solid fa-chevron-right"></i>
         </a>
       </li>
       <li class="page-item">
-        <a
-          (click)="goToLastPage()"
-          class="page-link"
-          href="javascript:void(0)"
-          aria-label="Next"
-          [class.disabled]="isLastPage"
-        >
+        <a (click)="goToLastPage()" class="page-link" href="javascript:void(0)" aria-label="Next" [class.disabled]="isLastPage">
           <i class="fa-solid fa-angles-right"></i>
         </a>
       </li>

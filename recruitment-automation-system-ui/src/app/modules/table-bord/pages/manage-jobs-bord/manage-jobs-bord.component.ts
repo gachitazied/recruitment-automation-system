@@ -39,4 +39,8 @@ export class ManageJobsBordComponent {
           }}
       )
     }
+
+  goBack() {
+    this.router.navigate(['jobsBord']);
+  }
 }

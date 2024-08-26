@@ -1,0 +1,67 @@
+/* Refined Styles for the Application Card */
+.application-card {
+    border: 1px solid #ccc;
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    margin-bottom: 1rem;
+    transition: box-shadow 0.3s ease;
+}
+
+.application-card:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.application-card .card-body {
+    padding: 1.5rem;
+}
+
+.application-card .card-title {
+    font-size: 1.125rem;
+    color: #333;
+    margin-bottom: 0.5rem;
+}
+
+.application-card .card-subtitle {
+    font-size: 0.975rem;
+    color: #666;
+    margin-bottom: 0.75rem;
+}
+
+.application-card .card-text {
+    font-size: 0.9rem;
+    color: #555;
+    margin-bottom: 0.5rem;
+}
+
+.application-card .card-link {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.application-card .card-link:hover {
+    text-decoration: underline;
+}
+
+.application-card .card-footer {
+    padding: 0.5rem;
+    background-color: #f8f9fa;
+    border-top: 1px solid #ddd;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.application-card .btn {
+    font-size: 0.875rem;
+    padding: 0.5rem;
+}
+
+
+.application-card .card-footer {
+    padding: 0.75rem 1.5rem;
+    background-color: #f8f9fa;
+    border-top: 1px solid #ddd;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}

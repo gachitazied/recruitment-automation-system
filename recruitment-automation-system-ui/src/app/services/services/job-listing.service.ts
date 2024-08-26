@@ -17,7 +17,11 @@ import { findAllJobs } from '../fn/job-listing/find-all-jobs';
 import { FindAllJobs$Params } from '../fn/job-listing/find-all-jobs';
 import { findJobsById } from '../fn/job-listing/find-jobs-by-id';
 import { FindJobsById$Params } from '../fn/job-listing/find-jobs-by-id';
+import { getJobStatisticsByDate } from '../fn/job-listing/get-job-statistics-by-date';
+import { GetJobStatisticsByDate$Params } from '../fn/job-listing/get-job-statistics-by-date';
 import { PageResponseJobListingResponse } from '../models/page-response-job-listing-response';
+import { searchJobs } from '../fn/job-listing/search-jobs';
+import { SearchJobs$Params } from '../fn/job-listing/search-jobs';
 import { updateJobListingById } from '../fn/job-listing/update-job-listing-by-id';
 import { UpdateJobListingById$Params } from '../fn/job-listing/update-job-listing-by-id';
 
@@ -74,6 +78,64 @@ export class JobListingService extends BaseService {
   updateJobListingById(params: UpdateJobListingById$Params, context?: HttpContext): Observable<void> {
     return this.updateJobListingById$Response(params, context).pipe(
       map((r: StrictHttpResponse<void>): void => r.body)
+    );
+  }
+
+  /** Path part for operation `getJobStatisticsByDate()` */
+  static readonly GetJobStatisticsByDatePath = '/jobs/statistics';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `getJobStatisticsByDate()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  getJobStatisticsByDate$Response(params?: GetJobStatisticsByDate$Params, context?: HttpContext): Observable<StrictHttpResponse<{
+[key: string]: number;
+}>> {
+    return getJobStatisticsByDate(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `getJobStatisticsByDate$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  getJobStatisticsByDate(params?: GetJobStatisticsByDate$Params, context?: HttpContext): Observable<{
+[key: string]: number;
+}> {
+    return this.getJobStatisticsByDate$Response(params, context).pipe(
+      map((r: StrictHttpResponse<{
+[key: string]: number;
+}>): {
+[key: string]: number;
+} => r.body)
+    );
+  }
+
+  /** Path part for operation `searchJobs()` */
+  static readonly SearchJobsPath = '/jobs/search';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `searchJobs()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  searchJobs$Response(params?: SearchJobs$Params, context?: HttpContext): Observable<StrictHttpResponse<PageResponseJobListingResponse>> {
+    return searchJobs(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `searchJobs$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  searchJobs(params?: SearchJobs$Params, context?: HttpContext): Observable<PageResponseJobListingResponse> {
+    return this.searchJobs$Response(params, context).pipe(
+      map((r: StrictHttpResponse<PageResponseJobListingResponse>): PageResponseJobListingResponse => r.body)
     );
   }
 

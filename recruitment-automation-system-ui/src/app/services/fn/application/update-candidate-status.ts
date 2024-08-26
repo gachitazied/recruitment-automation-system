@@ -6,11 +6,10 @@ import { filter, map } from 'rxjs/operators';
 import { StrictHttpResponse } from '../../strict-http-response';
 import { RequestBuilder } from '../../request-builder';
 
-import { ApplicationRequest } from '../../models/application-request';
 
 export interface UpdateCandidateStatus$Params {
   appId: number;
-      body: ApplicationRequest
+      body: string
 }
 
 export function updateCandidateStatus(http: HttpClient, rootUrl: string, params: UpdateCandidateStatus$Params, context?: HttpContext): Observable<StrictHttpResponse<void>> {

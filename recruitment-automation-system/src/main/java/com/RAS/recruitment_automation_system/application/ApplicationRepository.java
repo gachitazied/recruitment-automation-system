@@ -16,5 +16,6 @@ FROM Application a
 WHERE a.id = :appId
 """)
     Page<Application> findAllByAppId(@Param("appId") int appId, Pageable pageable);
+    long countByStatus(String status);
 
 }
