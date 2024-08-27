@@ -15,6 +15,8 @@ import { deleteApplicationById } from '../fn/application/delete-application-by-i
 import { DeleteApplicationById$Params } from '../fn/application/delete-application-by-id';
 import { findAllApplication } from '../fn/application/find-all-application';
 import { FindAllApplication$Params } from '../fn/application/find-all-application';
+import { findAllApplicationforRecruiter } from '../fn/application/find-all-applicationfor-recruiter';
+import { FindAllApplicationforRecruiter$Params } from '../fn/application/find-all-applicationfor-recruiter';
 import { findApplicationById } from '../fn/application/find-application-by-id';
 import { FindApplicationById$Params } from '../fn/application/find-application-by-id';
 import { getStatusStats } from '../fn/application/get-status-stats';
@@ -160,6 +162,31 @@ export class ApplicationService extends BaseService {
    */
   findApplicationById(params: FindApplicationById$Params, context?: HttpContext): Observable<PageResponseApplicationResponse> {
     return this.findApplicationById$Response(params, context).pipe(
+      map((r: StrictHttpResponse<PageResponseApplicationResponse>): PageResponseApplicationResponse => r.body)
+    );
+  }
+
+  /** Path part for operation `findAllApplicationforRecruiter()` */
+  static readonly FindAllApplicationforRecruiterPath = '/app/find/allforRecruiter';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `findAllApplicationforRecruiter()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  findAllApplicationforRecruiter$Response(params?: FindAllApplicationforRecruiter$Params, context?: HttpContext): Observable<StrictHttpResponse<PageResponseApplicationResponse>> {
+    return findAllApplicationforRecruiter(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `findAllApplicationforRecruiter$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  findAllApplicationforRecruiter(params?: FindAllApplicationforRecruiter$Params, context?: HttpContext): Observable<PageResponseApplicationResponse> {
+    return this.findAllApplicationforRecruiter$Response(params, context).pipe(
       map((r: StrictHttpResponse<PageResponseApplicationResponse>): PageResponseApplicationResponse => r.body)
     );
   }

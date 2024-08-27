@@ -14,8 +14,25 @@ public interface ApplicationRepository extends JpaRepository<Application,Integer
 SELECT a
 FROM Application a
 WHERE a.id = :appId
+AND a.owner.id = :id
 """)
-    Page<Application> findAllByAppId(@Param("appId") int appId, Pageable pageable);
-    long countByStatus(String status);
+    Page<Application> findAllByAppId(@Param("appId") int appId, Pageable pageable, int id);
 
+    @Query("SELECT COUNT(a) FROM Application a JOIN JobListing j ON a.jobListing.id = j.id WHERE j.owner.id = :id AND a.status = :status")
+    long countByStatusAndOwnerId(@Param("status") String status, @Param("id") int id);
+
+    @Query("""
+SELECT a
+FROM Application a
+WHERE a.owner.id = :id
+""")
+    Page<Application> findAllwithIdowner(Pageable pageable, int id);
+
+    @Query("""
+SELECT a
+FROM Application a
+JOIN JobListing j ON a.jobListing.id = j.id
+WHERE j.owner.id = :id
+""")
+    Page<Application> findAllwithIdownerJoinJobsListing(Pageable pageable,@Param("id") int id);
 }

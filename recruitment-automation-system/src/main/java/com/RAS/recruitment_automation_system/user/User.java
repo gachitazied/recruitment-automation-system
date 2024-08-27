@@ -1,5 +1,7 @@
 package com.RAS.recruitment_automation_system.user;
 
+import com.RAS.recruitment_automation_system.application.Application;
+import com.RAS.recruitment_automation_system.joblisting.JobListing;
 import com.RAS.recruitment_automation_system.notification.Notification;
 import com.RAS.recruitment_automation_system.role.Role;
 
@@ -41,7 +43,7 @@ public class User implements UserDetails, Principal {
     private boolean accountLocked;
     private boolean enabled;
 
-    //join with role table
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "role_id")
     private Role roles;
@@ -51,9 +53,15 @@ public class User implements UserDetails, Principal {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Notification> notifications ;
 
+    @OneToMany(mappedBy = "owner")
+    private List<JobListing> jobs;
+
+    @OneToMany(mappedBy = "owner")
+    private List<Application> applications;
 
 
-   public String getFullName() {
+
+    public String getFullName() {
        return username;
    }
 

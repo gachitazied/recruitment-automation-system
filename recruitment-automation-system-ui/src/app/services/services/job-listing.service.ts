@@ -15,6 +15,8 @@ import { deleteJobListingById } from '../fn/job-listing/delete-job-listing-by-id
 import { DeleteJobListingById$Params } from '../fn/job-listing/delete-job-listing-by-id';
 import { findAllJobs } from '../fn/job-listing/find-all-jobs';
 import { FindAllJobs$Params } from '../fn/job-listing/find-all-jobs';
+import { findAllJobsforCondidate } from '../fn/job-listing/find-all-jobsfor-condidate';
+import { FindAllJobsforCondidate$Params } from '../fn/job-listing/find-all-jobsfor-condidate';
 import { findJobsById } from '../fn/job-listing/find-jobs-by-id';
 import { FindJobsById$Params } from '../fn/job-listing/find-jobs-by-id';
 import { getJobStatisticsByDate } from '../fn/job-listing/get-job-statistics-by-date';
@@ -22,6 +24,8 @@ import { GetJobStatisticsByDate$Params } from '../fn/job-listing/get-job-statist
 import { PageResponseJobListingResponse } from '../models/page-response-job-listing-response';
 import { searchJobs } from '../fn/job-listing/search-jobs';
 import { SearchJobs$Params } from '../fn/job-listing/search-jobs';
+import { searchJobsForCandidate } from '../fn/job-listing/search-jobs-for-candidate';
+import { SearchJobsForCandidate$Params } from '../fn/job-listing/search-jobs-for-candidate';
 import { updateJobListingById } from '../fn/job-listing/update-job-listing-by-id';
 import { UpdateJobListingById$Params } from '../fn/job-listing/update-job-listing-by-id';
 
@@ -114,6 +118,31 @@ export class JobListingService extends BaseService {
     );
   }
 
+  /** Path part for operation `searchJobsForCandidate()` */
+  static readonly SearchJobsForCandidatePath = '/jobs/searchcandidate';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `searchJobsForCandidate()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  searchJobsForCandidate$Response(params?: SearchJobsForCandidate$Params, context?: HttpContext): Observable<StrictHttpResponse<PageResponseJobListingResponse>> {
+    return searchJobsForCandidate(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `searchJobsForCandidate$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  searchJobsForCandidate(params?: SearchJobsForCandidate$Params, context?: HttpContext): Observable<PageResponseJobListingResponse> {
+    return this.searchJobsForCandidate$Response(params, context).pipe(
+      map((r: StrictHttpResponse<PageResponseJobListingResponse>): PageResponseJobListingResponse => r.body)
+    );
+  }
+
   /** Path part for operation `searchJobs()` */
   static readonly SearchJobsPath = '/jobs/search';
 
@@ -160,6 +189,31 @@ export class JobListingService extends BaseService {
    */
   findJobsById(params: FindJobsById$Params, context?: HttpContext): Observable<PageResponseJobListingResponse> {
     return this.findJobsById$Response(params, context).pipe(
+      map((r: StrictHttpResponse<PageResponseJobListingResponse>): PageResponseJobListingResponse => r.body)
+    );
+  }
+
+  /** Path part for operation `findAllJobsforCondidate()` */
+  static readonly FindAllJobsforCondidatePath = '/jobs/find/allforCondidate';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `findAllJobsforCondidate()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  findAllJobsforCondidate$Response(params?: FindAllJobsforCondidate$Params, context?: HttpContext): Observable<StrictHttpResponse<PageResponseJobListingResponse>> {
+    return findAllJobsforCondidate(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `findAllJobsforCondidate$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  findAllJobsforCondidate(params?: FindAllJobsforCondidate$Params, context?: HttpContext): Observable<PageResponseJobListingResponse> {
+    return this.findAllJobsforCondidate$Response(params, context).pipe(
       map((r: StrictHttpResponse<PageResponseJobListingResponse>): PageResponseJobListingResponse => r.body)
     );
   }

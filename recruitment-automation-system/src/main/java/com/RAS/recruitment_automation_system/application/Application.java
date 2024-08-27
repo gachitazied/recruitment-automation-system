@@ -2,6 +2,7 @@ package com.RAS.recruitment_automation_system.application;
 
 
 import com.RAS.recruitment_automation_system.joblisting.JobListing;
+import com.RAS.recruitment_automation_system.user.User;
 import jakarta.persistence.*;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
@@ -34,6 +35,10 @@ public class Application {
     @Valid
     @NotNull(message = "Job listing cannot be null")
     private JobListing jobListing;
+
+    @ManyToOne
+    @JoinColumn(name = "owner_id")
+    private User owner;
 
 
 

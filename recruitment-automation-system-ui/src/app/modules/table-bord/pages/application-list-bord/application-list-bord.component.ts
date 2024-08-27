@@ -23,7 +23,7 @@ export class ApplicationListBordComponent implements OnInit {
   }
 
   private findAllApplications() {
-    this.applicationService.findAllApplication({
+    this.applicationService.findAllApplicationforRecruiter({
       page: this.page,
       size: this.size
     }).subscribe({

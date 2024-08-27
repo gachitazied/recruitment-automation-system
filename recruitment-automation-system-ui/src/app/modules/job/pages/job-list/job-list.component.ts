@@ -29,7 +29,7 @@ export class JobListComponent implements OnInit{
   }
 
   private findAllJobs() {
-    this.jobService.findAllJobs({
+    this.jobService.findAllJobsforCondidate({
       page: this.page,
       size: this.size
     }).subscribe({
@@ -41,7 +41,7 @@ export class JobListComponent implements OnInit{
   }
 
   public searchJobs() {
-    this.jobService.searchJobs({
+    this.jobService.searchJobsForCandidate({
       title: this.searchTitle,
       page: this.page,
       size: this.size,

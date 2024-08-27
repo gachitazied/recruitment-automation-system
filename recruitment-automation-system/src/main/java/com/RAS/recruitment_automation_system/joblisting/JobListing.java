@@ -1,6 +1,7 @@
 package com.RAS.recruitment_automation_system.joblisting;
 
 import com.RAS.recruitment_automation_system.application.Application;
+import com.RAS.recruitment_automation_system.user.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
@@ -51,4 +52,9 @@ public class JobListing {
     @JsonIgnore
     @OneToMany(mappedBy = "jobListing")
     private List<Application> applications;
+
+
+    @ManyToOne
+    @JoinColumn(name = "owner_id")
+    private User owner;
 }
