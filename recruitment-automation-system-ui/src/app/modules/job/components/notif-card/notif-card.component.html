@@ -1,0 +1,12 @@
+<div class="notif-card" [class.read]="notif.read">
+  <div class="notif-header">
+    <h4>{{ notif.message }}</h4>
+  </div>
+  <div class="notif-body">
+    <p>{{ notif.message }}</p>
+  </div>
+  <div class="notif-footer">
+    <button *ngIf="!notif.read" (click)="markAsRead()" class="btn mark-read">Mark as Read</button>
+    <button (click)="deleteNotif()" class="btn delete">Delete</button>
+  </div>
+</div>

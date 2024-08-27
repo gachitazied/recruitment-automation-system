@@ -1,9 +1,11 @@
 package com.RAS.recruitment_automation_system.notification;
 
+import com.RAS.recruitment_automation_system.common.PageResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.mail.MessagingException;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
@@ -21,16 +23,17 @@ public class NotificationController {
     ) throws MessagingException {
 
         Integer notificationId = notificationService.createNotification(request, connectedUser);
-
-
         notificationService.sendNotificationEmail(request, connectedUser);
-
         return ResponseEntity.ok(notificationId);
     }
 
     @GetMapping("/findAll")
-    public  ResponseEntity<NotificationResponse> findAllNotifications(Authentication connectedUser) {
-        return ResponseEntity.ok(notificationService.findAllNotifications(connectedUser));
+    public ResponseEntity<PageResponse<NotificationResponse>> findAllNotifications(
+            @RequestParam(name = "page", defaultValue = "0", required = false) int page,
+            @RequestParam(name = "size", defaultValue = "10", required = false) int size,
+            Authentication connectedUser) {
+
+        return ResponseEntity.ok(notificationService.findAllNotifications(page, size, connectedUser));
     }
 
     @GetMapping("/{NotifId}")

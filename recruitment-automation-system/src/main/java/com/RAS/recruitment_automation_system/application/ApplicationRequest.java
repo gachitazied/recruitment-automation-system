@@ -1,6 +1,6 @@
 package com.RAS.recruitment_automation_system.application;
 
-import com.RAS.recruitment_automation_system.joblisting.JobListing;
+
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 

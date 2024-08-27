@@ -6,14 +6,18 @@ import { filter, map } from 'rxjs/operators';
 import { StrictHttpResponse } from '../../strict-http-response';
 import { RequestBuilder } from '../../request-builder';
 
-import { NotificationResponse } from '../../models/notification-response';
+import { PageResponseNotificationResponse } from '../../models/page-response-notification-response';
 
 export interface FindAllNotifications$Params {
+  page?: number;
+  size?: number;
 }
 
-export function findAllNotifications(http: HttpClient, rootUrl: string, params?: FindAllNotifications$Params, context?: HttpContext): Observable<StrictHttpResponse<NotificationResponse>> {
+export function findAllNotifications(http: HttpClient, rootUrl: string, params?: FindAllNotifications$Params, context?: HttpContext): Observable<StrictHttpResponse<PageResponseNotificationResponse>> {
   const rb = new RequestBuilder(rootUrl, findAllNotifications.PATH, 'get');
   if (params) {
+    rb.query('page', params.page, {});
+    rb.query('size', params.size, {});
   }
 
   return http.request(
@@ -21,7 +25,7 @@ export function findAllNotifications(http: HttpClient, rootUrl: string, params?:
   ).pipe(
     filter((r: any): r is HttpResponse<any> => r instanceof HttpResponse),
     map((r: HttpResponse<any>) => {
-      return r as StrictHttpResponse<NotificationResponse>;
+      return r as StrictHttpResponse<PageResponseNotificationResponse>;
     })
   );
 }

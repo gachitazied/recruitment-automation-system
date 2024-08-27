@@ -12,6 +12,7 @@ export { NotificationResponse } from './models/notification-response';
 export { PageResponseApplicationResponse } from './models/page-response-application-response';
 export { PageResponseCandidateResponse } from './models/page-response-candidate-response';
 export { PageResponseJobListingResponse } from './models/page-response-job-listing-response';
+export { PageResponseNotificationResponse } from './models/page-response-notification-response';
 export { RegistrationRequest } from './models/registration-request';
 export { UserDetailRequest } from './models/user-detail-request';
 export { UserDetailResponse } from './models/user-detail-response';

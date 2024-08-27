@@ -10,7 +10,6 @@ import java.sql.Date;
 @NoArgsConstructor
 @Builder
 public class NotificationResponse {
-
     private int id;
     private String message;
     private boolean isRead;

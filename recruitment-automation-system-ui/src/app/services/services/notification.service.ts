@@ -18,6 +18,7 @@ import { FindAllNotifications$Params } from '../fn/notification/find-all-notific
 import { findNotificationById } from '../fn/notification/find-notification-by-id';
 import { FindNotificationById$Params } from '../fn/notification/find-notification-by-id';
 import { NotificationResponse } from '../models/notification-response';
+import { PageResponseNotificationResponse } from '../models/page-response-notification-response';
 import { updateIsRead } from '../fn/notification/update-is-read';
 import { UpdateIsRead$Params } from '../fn/notification/update-is-read';
 
@@ -136,7 +137,7 @@ export class NotificationService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  findAllNotifications$Response(params?: FindAllNotifications$Params, context?: HttpContext): Observable<StrictHttpResponse<NotificationResponse>> {
+  findAllNotifications$Response(params?: FindAllNotifications$Params, context?: HttpContext): Observable<StrictHttpResponse<PageResponseNotificationResponse>> {
     return findAllNotifications(this.http, this.rootUrl, params, context);
   }
 
@@ -146,9 +147,9 @@ export class NotificationService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  findAllNotifications(params?: FindAllNotifications$Params, context?: HttpContext): Observable<NotificationResponse> {
+  findAllNotifications(params?: FindAllNotifications$Params, context?: HttpContext): Observable<PageResponseNotificationResponse> {
     return this.findAllNotifications$Response(params, context).pipe(
-      map((r: StrictHttpResponse<NotificationResponse>): NotificationResponse => r.body)
+      map((r: StrictHttpResponse<PageResponseNotificationResponse>): PageResponseNotificationResponse => r.body)
     );
   }
 

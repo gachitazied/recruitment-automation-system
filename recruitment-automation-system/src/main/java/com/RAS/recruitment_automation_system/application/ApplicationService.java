@@ -18,6 +18,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -110,7 +111,7 @@ public class ApplicationService {
         application.setResumeUrl(request.resumeUrl());
         application.setCoverLetter(request.coverLetter());
         application.setStatus(request.status());
-        application.setApplicationDate(request.applicationDate());
+        application.setApplicationDate(Date.valueOf(LocalDate.now()));
         application.setJobListing(jobListing);
         application.setOwner(user);
         applicationRepository.save(application);

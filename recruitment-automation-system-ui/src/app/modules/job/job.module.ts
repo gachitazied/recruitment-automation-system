@@ -9,9 +9,10 @@ import { JobListComponent } from './pages/job-list/job-list.component';
 import { UserDetailsComponent } from './pages/user-details/user-details.component';
 import {FormsModule} from "@angular/forms";
 import { ApplyManageComponent } from './pages/apply-manage/apply-manage.component';
-import { NotificationComponent } from './pages/notification/notification.component';
 import { ApplicationCardComponent } from './components/application-card/application-card.component';
 import { ApplicationListComponent } from './pages/application-list/application-list.component';
+import { NotifCardComponent } from './components/notif-card/notif-card.component';
+import { NotifListComponent } from './pages/notif-list/notif-list.component';
 
 
 @NgModule({
@@ -22,9 +23,10 @@ import { ApplicationListComponent } from './pages/application-list/application-l
     JobListComponent,
     UserDetailsComponent,
     ApplyManageComponent,
-    NotificationComponent,
     ApplicationCardComponent,
-    ApplicationListComponent
+    ApplicationListComponent,
+    NotifCardComponent,
+    NotifListComponent
   ],
   imports: [
     CommonModule,

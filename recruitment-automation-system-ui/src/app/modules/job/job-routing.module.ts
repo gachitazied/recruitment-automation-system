@@ -4,8 +4,8 @@ import { MainComponent } from './pages/main/main.component';
 import { JobListComponent } from './pages/job-list/job-list.component';
 import { UserDetailsComponent } from './pages/user-details/user-details.component';
 import { ApplyManageComponent } from './pages/apply-manage/apply-manage.component';
-import {NotificationComponent} from "./pages/notification/notification.component";
 import {ApplicationListComponent} from "./pages/application-list/application-list.component";
+import {NotifListComponent} from "./pages/notif-list/notif-list.component";
 
 const routes: Routes = [
   {
@@ -15,8 +15,8 @@ const routes: Routes = [
       { path: '', component: JobListComponent },
       { path: 'my-account', component: UserDetailsComponent },
       { path: 'apply-manage/:job_id', component: ApplyManageComponent },
-      { path: 'notification', component: NotificationComponent},
-      {path:'my-applications',component:ApplicationListComponent}
+      {path:'my-applications',component:ApplicationListComponent},
+      {path:'notification',component:NotifListComponent}
     ]
   }
 ];
