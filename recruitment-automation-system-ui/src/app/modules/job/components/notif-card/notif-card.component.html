@@ -4,6 +4,7 @@
   </div>
   <div class="notif-body">
     <p>{{ notif.message }}</p>
+    <p class="notif-date" *ngIf="notif.date">Date: {{ notif.date | date: 'short' }}</p>
   </div>
   <div class="notif-footer">
     <button *ngIf="!notif.read" (click)="markAsRead()" class="btn mark-read">Mark as Read</button>

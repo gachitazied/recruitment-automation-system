@@ -10,3 +10,27 @@
   margin-left: auto;
 }
 
+
+/* Ensure the body takes full height */
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+/* Container to center the notifications */
+.notif-list-container {
+  display: flex;
+  justify-content: center; /* Center horizontally */
+  align-items: center;     /* Center vertically */
+  height: 100vh;           /* Full viewport height */
+  padding: 20px;           /* Optional: Add padding for better spacing */
+}
+
+/* Content container to control width and layout */
+.notif-list-content {
+  display: flex;
+  flex-direction: column;
+  gap: 15px; /* Adjust gap between notifications */
+  max-width: 1200px; /* Adjust the maximum width as needed */
+  width: 100%; /* Ensure it takes the full width of its container */
+}

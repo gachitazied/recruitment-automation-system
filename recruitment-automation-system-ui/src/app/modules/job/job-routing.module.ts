@@ -6,17 +6,19 @@ import { UserDetailsComponent } from './pages/user-details/user-details.componen
 import { ApplyManageComponent } from './pages/apply-manage/apply-manage.component';
 import {ApplicationListComponent} from "./pages/application-list/application-list.component";
 import {NotifListComponent} from "./pages/notif-list/notif-list.component";
+import {authGuard} from "../../services/guard/auth.guard";
 
 const routes: Routes = [
   {
     path: '',
     component: MainComponent,
+    canActivate: [authGuard],
     children: [
-      { path: '', component: JobListComponent },
-      { path: 'my-account', component: UserDetailsComponent },
-      { path: 'apply-manage/:job_id', component: ApplyManageComponent },
-      {path:'my-applications',component:ApplicationListComponent},
-      {path:'notification',component:NotifListComponent}
+      { path: '', component: JobListComponent, canActivate: [authGuard] },
+      { path: 'my-account', component: UserDetailsComponent, canActivate: [authGuard] },
+      { path: 'apply-manage/:job_id', component: ApplyManageComponent, canActivate: [authGuard] },
+      {path:'my-applications',component:ApplicationListComponent, canActivate: [authGuard]},
+      {path:'notification',component:NotifListComponent, canActivate: [authGuard]}
     ]
   }
 ];

@@ -6,19 +6,21 @@ import {ManageJobsBordComponent} from "./pages/manage-jobs-bord/manage-jobs-bord
 import {UpdateJobsBordComponent} from "./pages/update-jobs-bord/update-jobs-bord.component";
 import {ApplicationListBordComponent} from "./pages/application-list-bord/application-list-bord.component";
 import {StaticApplicationComponent} from "./pages/static-application/static-application.component";
+import {authGuardRecruiter} from "../../services/guardRecruiter/auth.guard";
 
 
 const routes: Routes = [
   {
     path: '',
     component: MainTableBordComponent,
+      canActivate: [authGuardRecruiter],
     children: [
 
-        { path: 'jobsBord', component: JobListBordComponent },
-        { path: 'add-job', component: ManageJobsBordComponent },
-        {path: 'edit-job/:id', component: UpdateJobsBordComponent},
-        {path:'applicationsBord',component: ApplicationListBordComponent},
-        {path: 'staticApplicationsBord',component: StaticApplicationComponent}
+        { path: '', component: JobListBordComponent, canActivate: [authGuardRecruiter] },
+        { path: 'add-job', component: ManageJobsBordComponent, canActivate: [authGuardRecruiter] },
+        {path: 'edit-job/:id', component: UpdateJobsBordComponent, canActivate: [authGuardRecruiter]},
+        {path:'applicationsBord',component: ApplicationListBordComponent, canActivate: [authGuardRecruiter]},
+        {path: 'staticApplicationsBord',component: StaticApplicationComponent, canActivate: [authGuardRecruiter]}
     ]
   }
 ]

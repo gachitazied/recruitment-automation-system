@@ -12,7 +12,7 @@ export class NotifListComponent implements OnInit {
 
   NotificationResponse: PageResponseNotificationResponse  = {};
   page = 0;
-  size = 5;
+  size = 4;
   pages: any = [];
   message = '';
   level: 'success' |'error' = 'success';

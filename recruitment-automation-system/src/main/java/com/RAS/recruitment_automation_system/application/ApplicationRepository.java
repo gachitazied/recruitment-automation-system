@@ -1,6 +1,7 @@
 package com.RAS.recruitment_automation_system.application;
 
 import com.RAS.recruitment_automation_system.joblisting.JobListing;
+import com.RAS.recruitment_automation_system.user.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -35,4 +36,5 @@ JOIN JobListing j ON a.jobListing.id = j.id
 WHERE j.owner.id = :id
 """)
     Page<Application> findAllwithIdownerJoinJobsListing(Pageable pageable,@Param("id") int id);
+
 }

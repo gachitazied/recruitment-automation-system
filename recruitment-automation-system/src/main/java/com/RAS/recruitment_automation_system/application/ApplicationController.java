@@ -3,6 +3,8 @@ package com.RAS.recruitment_automation_system.application;
 
 import com.RAS.recruitment_automation_system.common.PageResponse;
 
+import com.RAS.recruitment_automation_system.email.EmailService;
+import com.RAS.recruitment_automation_system.notification.NotificationMapper;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -19,6 +21,8 @@ import java.util.Map;
 @Tag(name = "application")
 public class ApplicationController {
     private final ApplicationService applicationService;
+    public final NotificationMapper notificationMapper;
+    private final EmailService emailService;
 
 
     @PostMapping("/create/{jobId}")

@@ -70,7 +70,6 @@ public class EmailService {
         MimeMessage mimeMessage = mailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, MimeMessageHelper.MULTIPART_MODE_MIXED, "UTF-8");
 
-        // Préparer le contexte pour Thymeleaf
         Context context = new Context();
         context.setVariable("message", message);
         context.setVariable("date", new Date());
@@ -86,6 +85,29 @@ public class EmailService {
         mailSender.send(mimeMessage);
         log.info("Email sent to {}", to);
     }
+
+    @Async
+    public void sendStatusEmail(String to, String subject, String message) throws MessagingException {
+        MimeMessage mimeMessage = mailSender.createMimeMessage();
+        MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, MimeMessageHelper.MULTIPART_MODE_MIXED, "UTF-8");
+
+        Context context = new Context();
+        context.setVariable("message", message);
+        context.setVariable("date", new Date());
+
+
+        String emailContent = templateEngine.process("StatusNotification", context);
+
+        helper.setFrom("Gachita&Barkaoui@gmail.com");
+        helper.setTo(to);
+        helper.setSubject(subject);
+        helper.setText(emailContent, true); // true pour le format HTML
+
+        mailSender.send(mimeMessage);
+        log.info("Email sent to {}", to);
+    }
+
+
 
 
 

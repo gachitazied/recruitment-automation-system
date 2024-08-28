@@ -7,6 +7,8 @@ import {ActivateAccountComponent} from "./pages/activate-account/activate-accoun
 import {LoginRecruiterComponent} from "./pages/login-recruiter/login-recruiter.component";
 import {RegisterRecruiterComponent} from "./pages/register-recruiter/register-recruiter.component";
 import {ActivateAccountRecComponent} from "./pages/activate-account-rec/activate-account-rec.component";
+import {authGuard} from "./services/guard/auth.guard";
+import {authGuardRecruiter} from "./services/guardRecruiter/auth.guard";
 
 
 const routes: Routes = [
@@ -37,11 +39,13 @@ const routes: Routes = [
   },
   {
     path : 'jobs',
-    loadChildren: () => import('./modules/job/job.module').then(j => j.JobModule)
+    loadChildren: () => import('./modules/job/job.module').then(j => j.JobModule),
+    canActivate: [authGuard]
   },
   {
     path : 'tableboard',
-    loadChildren: () => import('./modules/table-bord/table-bord.module').then(t => t.TableBordModule)
+    loadChildren: () => import('./modules/table-bord/table-bord.module').then(t => t.TableBordModule),
+    canActivate: [authGuardRecruiter]
   }
 ];
 

@@ -43,9 +43,9 @@ public class NotificationService{
         String message = "You have a new notification:\n\n" +
                 "Message: " + request.message() + "\n" +
                 "Date: " + new Date();
-
         emailService.sendNotificationEmail(to, subject, message);
     }
+
 
 
     public NotificationResponse findNotificationById(Integer notifId) {
